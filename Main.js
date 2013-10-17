@@ -6,17 +6,13 @@
  */
 (function() {
 
-    var camera, renderer, scene, container, bricks = [];
-    var mouseX = 0, mouseY = 0;
-
-    var WIDTH = window.innerWidth, HEIGHT = window.innerHeight;
-
-    init();
-    anim();
-
-    function init() {
-
-        var parameters = {
+    var container, bricks;
+    var shared = {
+        width: window.innerWidth,
+        height: window.innerHeight,
+        mouseX: 0,
+        mouseY: 0,
+        parameters: {
             bricksize: {
                 width: 10,
                 height: 5,
@@ -34,42 +30,38 @@
                 y: 3,
                 z: 3
             }
-        };
+        },
+        util: {
+            combine: function(rule) {
+                return rule.apply(this, [].slice.call(arguments, 1));
+            }
+        }
+    }
+
+    init();
+    anim();
+
+    function init() {
 
         container = document.createElement('div');
         container.id = "webgl";
         document.body.appendChild(container);
 
-        renderer = new THREE.WebGLRenderer();
-        camera = new THREE.PerspectiveCamera(45, WIDTH / HEIGHT, 0.1, 1000 );
-        scene = new THREE.Scene();
+        shared.renderer = new THREE.WebGLRenderer();
+        shared.camera = new THREE.PerspectiveCamera(45, shared.width / shared.height, 0.1, 1000 );
+        shared.scene = new THREE.Scene();
 
-        renderer.setClearColor(0x000000);
-        camera.position.z = 100;
-        scene.add(camera);
-        renderer.setSize( WIDTH, HEIGHT, void 0 );
+        shared.renderer.setClearColor(0x000000);
+        shared.camera.position.z = 100;
+        shared.scene.add(shared.camera);
+        shared.renderer.setSize( shared.width, shared.height, void 0 );
 
-        container.appendChild(renderer.domElement);
+        container.appendChild(shared.renderer.domElement);
 
-        var material = new THREE.MeshBasicMaterial({wireframe:true});
+        bricks = new Bricks(shared);
 
-        function setup(piece, chunk, size, spacing, layout) {
-
-            var brick = piece(size.width, size.height, size.depth, material, spacing);
-            var chunksize = {
-                width: size.width * layout.x,
-                height: size.height * layout.y,
-                depth: size.depth * layout.z
-            };
-            return chunk(brick, layout, chunksize);
-
-        }
-
-        bricks = combine(setup, generateBrick, generateWall, parameters.bricksize, parameters.brickspacing, parameters.bricklayout);
-
-        bricks.forEach(function(b) {
-            scene.add(b.mesh);
-            //console.log(b.mesh.position);
+        bricks.update(function(b) {
+            shared.scene.add(b.mesh);
         });
 
         //window.addEventListener('mousemove', onMouseMove, false);
@@ -78,53 +70,23 @@
 
     function anim() {
         requestAnimationFrame(anim);
-        camera.position.x = mouseX;
-        camera.position.y = mouseY;
-        camera.lookAt(scene.position);
+        shared.camera.position.x = shared.mouseX;
+        shared.camera.position.y = shared.mouseY;
+        shared.camera.lookAt(shared.scene.position);
 
-        renderer.render(scene, camera);
+        shared.renderer.render(shared.scene, shared.camera);
 
-    }
+        bricks.update(function(b) {
+            b.mesh.position.y += 0.01;
+        });
 
-    function generateBrick(width, height, depth, material, separation) {
-        var geometry = new THREE.CubeGeometry(width, height, depth);
-        var material = material || new THREE.MeshBasicMaterial({wireframe: true});
-        var brick = new THREE.Mesh(geometry, material);
-        return function (id) {
-            this.mesh = brick;
-            this.id = id;
-            this.width = separation ? separation.x + this.mesh.geometry.width : this.mesh.geometry.width;
-            this.height = separation ? separation.y + this.mesh.geometry.height : this.mesh.geometry.height;
-            this.depth = separation ? separation.z + this.mesh.geometry.depth : this.mesh.geometry.depth;
-        }
-    }
 
-    function generateWall(fn, dim, csize) {
-        var Brick = fn;
-        var meshid = 5;
-        var bricks = [];
-        (function() {
-            for (var x = 0, y = 0, z = 0; x < dim.x; x++) {
-                for ( y = 0; y < dim.y; y++){
-                    for( z = 0; z < dim.z; z++) {
-                        var brick = new Brick({x: x, y: y, z: z});
-                        brick.mesh.position = new THREE.Vector3(x * brick.width - (csize.width / 2), y * brick.height, z * brick.depth);
-                        brick.mesh = brick.mesh.clone();
-                        bricks.push(brick);
-                    }
-                }
-            }
-        }());
-        return bricks;
-    }
 
-    function combine(rule) {
-        return rule.apply(this, [].slice.call(arguments, 1));
     }
 
     function onMouseMove(event) {
-        mouseX = event.clientX;
-        mouseY = event.clientY;
+        shared.mouseX = event.clientX;
+        shared.mouseY = event.clientY;
     }
 
 }());
