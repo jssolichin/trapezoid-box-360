@@ -6,7 +6,7 @@
  */
 (function() {
 
-    var container, bricks;
+    var container, bricks, paddle;
     var shared = {
         width: window.innerWidth,
         height: window.innerHeight,
@@ -29,6 +29,18 @@
                 x: 3,
                 y: 3,
                 z: 3
+            },
+
+            brickoffsets: {
+                x: 0,
+                y: 10,
+                z: 0
+            },
+
+            paddlesize: {
+                width: 10,
+                height: 2,
+                depth: 5
             }
         },
         util: {
@@ -64,6 +76,13 @@
             shared.scene.add(b.mesh);
         });
 
+        paddle = new Paddles(shared);
+
+        shared.scene.add(paddle.geometry);
+
+
+
+
         //window.addEventListener('mousemove', onMouseMove, false);
 
     }
@@ -76,10 +95,11 @@
 
         shared.renderer.render(shared.scene, shared.camera);
 
+        /*
         bricks.update(function(b) {
             b.mesh.position.y += 0.01;
         });
-
+        */
 
 
     }

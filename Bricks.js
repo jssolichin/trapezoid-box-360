@@ -5,15 +5,15 @@ var Bricks = function(shared) {
 
     var material = new THREE.MeshBasicMaterial({wireframe:true});
 
-    function setup(piece, chunk, size, spacing, layout) {
+    function setup(piecefn, wallfn, size, spacing, layout, offset) {
 
-        var brick = piece(size.width, size.height, size.depth, material, spacing);
-        var chunksize = {
+        var brick = piecefn(size.width, size.height, size.depth, material, spacing);
+        var wallsize = {
             width: size.width * layout.x,
             height: size.height * layout.y,
             depth: size.depth * layout.z
         };
-        return chunk(brick, layout, chunksize);
+        return wallfn(brick, layout, wallsize, offset);
 
     }
 
@@ -30,16 +30,16 @@ var Bricks = function(shared) {
         }
     }
 
-    function generateWall(fn, dim, csize) {
+    function generateWall(fn, dim, csize, offset) {
         var Brick = fn;
-        var meshid = 5;
         var bricks = [];
         (function() {
             for (var x = 0, y = 0, z = 0; x < dim.x; x++) {
                 for ( y = 0; y < dim.y; y++){
                     for( z = 0; z < dim.z; z++) {
                         var brick = new Brick({x: x, y: y, z: z});
-                        brick.mesh.position = new THREE.Vector3(x * brick.width - (csize.width / 2), y * brick.height, z * brick.depth);
+                        brick.mesh.position = new THREE.Vector3(x * brick.width - (csize.width / 2),
+                            y * brick.height + offset.y, z * brick.depth);
                         brick.mesh = brick.mesh.clone();
                         bricks.push(brick);
                     }
@@ -49,7 +49,8 @@ var Bricks = function(shared) {
         return bricks;
     }
 
-    this.brickList = shared.util.combine(setup, generateBrick, generateWall, shared.parameters.bricksize, shared.parameters.brickspacing, shared.parameters.bricklayout);
+    this.brickList = shared.util.combine(setup, generateBrick, generateWall, shared.parameters.bricksize,
+        shared.parameters.brickspacing, shared.parameters.bricklayout, shared.parameters.brickoffsets);
 };
 
 Bricks.prototype.update = function(fn) {
