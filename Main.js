@@ -6,13 +6,21 @@
  */
 (function() {
 
-    var container, bricks, paddle;
+    var container, bricks, paddle, boundingBox;
     var shared = {
         width: window.innerWidth,
         height: window.innerHeight,
         mouseX: 0,
         mouseY: 0,
         parameters: {
+            bounding: {
+                width: 50,
+                height: 50,
+                depth: 50,
+                x: -2,
+                y: 5,
+                z: 0
+            },
             bricksize: {
                 width: 10,
                 height: 5,
@@ -70,6 +78,10 @@
 
         container.appendChild(shared.renderer.domElement);
 
+        boundingBox = new BoundingBox(shared);
+
+        shared.scene.add(boundingBox.geometry);
+
         bricks = new Bricks(shared);
 
         bricks.update(function(b) {
@@ -101,6 +113,18 @@
         });
         */
 
+    }
+
+    function BoundingBox(shared) {
+        this.width = shared.parameters.bounding.width;
+        this.height = shared.parameters.bounding.height;
+        this.depth = shared.parameters.bounding.depth;
+        var geometry = new THREE.CubeGeometry(this.width, this.height, this.depth);
+        var material = new THREE.MeshBasicMaterial({wireframe: true});
+        var boundingBox = new THREE.Mesh(geometry, material);
+        boundingBox.position = new THREE.Vector3(shared.parameters.bounding.x, shared.parameters.bounding.y,
+            shared.parameters.bounding.z);
+        this.geometry = boundingBox.clone();
 
     }
 
