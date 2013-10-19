@@ -6,7 +6,7 @@
  */
 (function () {
 
-    var container, bricks, paddle, boundingBox;
+    var container, bricks, paddle, boundingBox, ball;
     var shared = {
         width: window.innerWidth,
         height: window.innerHeight,
@@ -14,6 +14,7 @@
         mouseY: 0,
         key: '',
         parameters: {
+            ballsize: 2,
             bounding: {
                 width: 50,
                 height: 50,
@@ -92,7 +93,10 @@
 
         paddle = new Paddles(shared);
 
+        ball = new Balls(shared);
+
         shared.scene.add(paddle.geometry);
+        shared.scene.add(ball.geometry);
 
         window.addEventListener('mousemove', onMouseMove, false);
         window.addEventListener('keypress', onKeyPress, false);
@@ -138,7 +142,7 @@
             movement.x = -shared.parameters.paddlespeed;
         }
         paddle.incrementPos(movement);
-    };
+    }
 
     function onMouseMove(event) {
         shared.mouseX = event.clientX;
