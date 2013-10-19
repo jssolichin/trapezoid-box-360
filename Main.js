@@ -12,7 +12,7 @@
         height: window.innerHeight,
         mouseX: 0,
         mouseY: 0,
-        key: '',
+        pressedKeys: [0, 0, 0, 0],
         parameters: {
             ballsize: 2,
             ballspeed: {
@@ -104,8 +104,8 @@
         shared.scene.add(ball.geometry);
 
         window.addEventListener('mousemove', onMouseMove, false);
-        window.addEventListener('keypress', onKeyPress, false);
-        window.addEventListener('keyup', function () { shared.key = ''; }, false);
+        window.addEventListener('keydown', handleKeyPresses, false);
+        window.addEventListener('keyup', handleKeyPresses, false);
 
     }
 
@@ -114,7 +114,7 @@
         shared.camera.position.x = -shared.mouseX * 0.1 + 10;
         shared.camera.lookAt(shared.scene.position);
 
-        computePaddle(paddle, shared.key);
+        computePaddle(paddle, shared.pressedKeys);
         ball.update(shared.parameters.bounding);
 
 
@@ -136,17 +136,8 @@
 
     }
 
-    function computePaddle(paddle, key) {
-        var movement = {x: 0, y: 0, z: 0};
-        if (key == 'w') {
-            movement.z = -shared.parameters.paddlespeed;
-        } if (key == 's') {
-            movement.z = shared.parameters.paddlespeed;
-        } if (key == 'd') {
-            movement.x = shared.parameters.paddlespeed;
-        } if (key == 'a') {
-            movement.x = -shared.parameters.paddlespeed;
-        }
+    function computePaddle(paddle, pressedKeys) {
+        var movement = {x: pressedKeys[3] - pressedKeys[1], y: 0, z: pressedKeys[2] - pressedKeys[0]};
         paddle.incrementPos(movement);
     }
 
@@ -155,8 +146,21 @@
         shared.mouseY = event.clientY;
     }
 
-    function onKeyPress(event) {
-        shared.key = String.fromCharCode(event.keyCode);
+    function handleKeyPresses(event) {
+        var key = String.fromCharCode(event.keyCode);
+        if (key == 'W') {
+            shared.pressedKeys[0] = shared.pressedKeys[0] == 0 ? 1 : 0;
+        }
+        if (key == 'A') {
+            shared.pressedKeys[1] = shared.pressedKeys[1] == 0 ? 1 : 0;
+        }
+        if (key == 'S') {
+            shared.pressedKeys[2] = shared.pressedKeys[2] == 0 ? 1 : 0;
+        }
+        if (key == 'D') {
+            shared.pressedKeys[3] = shared.pressedKeys[3] == 0 ? 1 : 0;
+        }
+
     }
 
 }());

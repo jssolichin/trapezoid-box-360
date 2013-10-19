@@ -15,7 +15,6 @@ var Balls = function (shared) {
 
 Balls.prototype.update = function (bounding) {
     if (this.checkBounce(this.geometry.position.y, bounding.height, bounding.y)) {
-        console.log(this.geometry.position.y);
         this.velocity.y = this.velocity.y * -1;
     }
     if (this.checkBounce(this.geometry.position.x, bounding.width, bounding.x)) {
