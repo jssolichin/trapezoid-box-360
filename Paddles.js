@@ -4,7 +4,7 @@
  * Date: 10/18/13
  * Time: 2:06 PM
  */
-var Paddles = function(shared) {
+var Paddles = function (shared) {
 
     var geometry = new THREE.CubeGeometry(shared.parameters.paddlesize.width, shared.parameters.paddlesize.height,
         shared.parameters.paddlesize.depth);
@@ -17,13 +17,13 @@ var Paddles = function(shared) {
 
 };
 
-Paddles.prototype.updatePos = function(x, y, z) {
+Paddles.prototype.updatePos = function (x, y, z) {
     this.geometry.position.x = x;
     this.geometry.position.y = y;
     this.geometry.position.z = z;
 };
 
-Paddles.prototype.getPos = function() {
+Paddles.prototype.getPos = function () {
     return {x: this.geometry.position.x, y: this.geometry.position.y, z: this.geometry.position.z};
 };
 

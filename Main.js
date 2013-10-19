@@ -60,7 +60,7 @@
                 height: 2,
                 depth: 5
             },
-            paddlespeed: 0.3
+            paddlespeed: 0.6
         },
         signals: {
             blockHit: new Signal()
@@ -113,7 +113,7 @@
 
         window.addEventListener('mousemove', onMouseMove, false);
         window.addEventListener('click', onClick, false);
-        window.addEventListener('keydown', handleKeyPresses(1), false);
+        window.addEventListener('keydown', handleKeyPresses(shared.parameters.paddlespeed), false);
         window.addEventListener('keyup', handleKeyPresses(0), false);
 
     }
@@ -160,30 +160,30 @@
         console.log(shared.pressedKeys);
     }
 
-    function handleKeyPresses(direction) {
+    function handleKeyPresses(speed) {
         return function (event) {
             var key = String.fromCharCode(event.keyCode);
             if (key == 'W') {
-                shared.pressedKeys[0] = direction;
+                shared.pressedKeys[0] = speed;
                 shared.pressedKeys[2] = 0;
             }
             if (key == 'A') {
-                shared.pressedKeys[1] = direction;
+                shared.pressedKeys[1] = speed;
                 shared.pressedKeys[3] = 0;
             }
             if (key == 'S') {
-                shared.pressedKeys[2] = direction;
+                shared.pressedKeys[2] = speed;
                 shared.pressedKeys[0] = 0;
             }
             if (key == 'D') {
-                shared.pressedKeys[3] = direction;
+                shared.pressedKeys[3] = speed;
                 shared.pressedKeys[1] = 0;
             }
 
             if (key == 'T') {
                 shared.signals.blockHit.dispatch(2);
             }
-        }
+        };
 
 
     }
