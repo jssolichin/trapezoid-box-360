@@ -4,7 +4,7 @@
  * Date: 10/15/13
  * Time: 11:40 PM
  */
-(function() {
+(function () {
 
     var container, bricks, paddle, boundingBox;
     var shared = {
@@ -76,7 +76,7 @@
         shared.renderer.setClearColor(0x000000);
         shared.camera.position.z = 100;
         shared.scene.add(shared.camera);
-        shared.renderer.setSize( shared.width, shared.height, void 0 );
+        shared.renderer.setSize(shared.width, shared.height, void 0);
 
         container.appendChild(shared.renderer.domElement);
 
@@ -86,7 +86,7 @@
 
         bricks = new Bricks(shared);
 
-        bricks.update(function(b) {
+        bricks.update(function (b) {
             shared.scene.add(b.mesh);
         });
 
@@ -96,26 +96,20 @@
 
         window.addEventListener('mousemove', onMouseMove, false);
         window.addEventListener('keypress', onKeyPress, false);
-        window.addEventListener('keyup', function() { shared.key = ''}, false);
+        window.addEventListener('keyup', function () { shared.key = ''; }, false);
 
     }
 
     function anim() {
         requestAnimationFrame(anim);
         shared.camera.position.x = -shared.mouseX * 0.01 + 10;
-        //shared.camera.position.y = shared.mouseY;
         shared.camera.lookAt(shared.scene.position);
 
         computePaddle(paddle, shared.key);
-        //console.log(shared.key);
+
 
         shared.renderer.render(shared.scene, shared.camera);
 
-        /*
-        bricks.update(function(b) {
-            b.mesh.position.y += 0.01;
-        });
-        */
 
     }
 
@@ -133,7 +127,7 @@
     }
 
     function computePaddle(paddle, key) {
-        var movement = {x:0, y:0, z:0};
+        var movement = {x: 0, y: 0, z: 0};
         if (key == 'w') {
             movement.z = -shared.parameters.paddlespeed;
         } if (key == 's') {
@@ -143,7 +137,6 @@
         } if (key == 'a') {
             movement.x = -shared.parameters.paddlespeed;
         }
-        console.log(movement);
         paddle.incrementPos(movement);
     };
 
