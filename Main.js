@@ -26,7 +26,10 @@
                 depth: 50,
                 x: -2,
                 y: 5,
-                z: 0
+                z: 0,
+                sx: 5,
+                sy: 5,
+                sz: 5
             },
             bricksize: {
                 width: 10,
@@ -127,7 +130,8 @@
         this.width = shared.parameters.bounding.width;
         this.height = shared.parameters.bounding.height;
         this.depth = shared.parameters.bounding.depth;
-        var geometry = new THREE.CubeGeometry(this.width, this.height, this.depth);
+        var geometry = new THREE.CubeGeometry(this.width, this.height, this.depth,
+            shared.parameters.bounding.sx, shared.parameters.bounding.sy, shared.parameters.bounding.sz);
         var material = new THREE.MeshBasicMaterial({wireframe: true});
         var boundingBox = new THREE.Mesh(geometry, material);
         boundingBox.position = new THREE.Vector3(shared.parameters.bounding.x, shared.parameters.bounding.y,
@@ -137,7 +141,7 @@
     }
 
     function computePaddle(paddle, pressedKeys) {
-        var movement = {x: pressedKeys[3] - pressedKeys[1], y: 0, z: pressedKeys[2] - pressedKeys[0]};
+        var movement = {x: pressedKeys[3] - pressedKeys[1], z: pressedKeys[2] - pressedKeys[0]};
         paddle.incrementPos(movement);
     }
 
