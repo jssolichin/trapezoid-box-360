@@ -3,8 +3,9 @@
  */
 var Bricks = function(shared) {
 
-    var material = new THREE.MeshBasicMaterial({wireframe:true});
+    var material = new THREE.MeshBasicMaterial({wireframe: true});
 
+    //function to combine brick generating function with wall function.
     function setup(piecefn, wallfn, size, spacing, layout, offset) {
 
         var brick = piecefn(size.width, size.height, size.depth, material, spacing);
@@ -16,7 +17,7 @@ var Bricks = function(shared) {
         return wallfn(brick, layout, wallsize, offset);
 
     }
-
+    //function to generate individual brick
     function generateBrick(width, height, depth, material, separation) {
         var geometry = new THREE.CubeGeometry(width, height, depth);
         var material = material || new THREE.MeshBasicMaterial({wireframe: true});
@@ -29,7 +30,7 @@ var Bricks = function(shared) {
             this.depth = separation ? separation.z + this.mesh.geometry.depth : this.mesh.geometry.depth;
         }
     }
-
+    //function to generate entire wall
     function generateWall(fn, dim, csize, offset) {
         var Brick = fn;
         var bricks = [];
@@ -53,6 +54,7 @@ var Bricks = function(shared) {
         shared.parameters.brickspacing, shared.parameters.bricklayout, shared.parameters.brickoffsets);
 };
 
+//function to update all the bricks
 Bricks.prototype.update = function(fn) {
     this.brickList.forEach(function(b) {
         fn(b);

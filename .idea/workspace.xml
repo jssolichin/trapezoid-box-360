@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c1fa1097-c59a-400d-9f6d-c4c903a3e90f" name="Default" comment="fixed movement and added camera rotation">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Balls.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/alxlu.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLinters/jslint.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
+    <list default="true" id="c1fa1097-c59a-400d-9f6d-c4c903a3e90f" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bricks.js" afterPath="$PROJECT_DIR$/Bricks.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main.js" afterPath="$PROJECT_DIR$/Main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Paddles.js" afterPath="$PROJECT_DIR$/Paddles.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Yholo.iws" />
@@ -35,25 +31,25 @@
       <file leaf-file-name="Main.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="0" selection-start="1321" selection-end="1321" vertical-scroll-proportion="0.0" vertical-offset="735" max-vertical-offset="2355">
+            <state line="107" column="8" selection-start="2698" selection-end="2698" vertical-scroll-proportion="0.0" vertical-offset="1455" max-vertical-offset="2355">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Balls.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Balls.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Balls.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="0" selection-start="73" selection-end="73" vertical-scroll-proportion="0.07100592" vertical-offset="0" max-vertical-offset="845">
+            <state line="4" column="0" selection-start="73" selection-end="73" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="165">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Paddles.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Paddles.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Paddles.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="0" selection-start="127" selection-end="127" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="585">
+            <state line="29" column="42" selection-start="822" selection-end="822" vertical-scroll-proportion="0.77956986" vertical-offset="0" max-vertical-offset="585">
               <folding />
             </state>
           </provider>
@@ -62,7 +58,7 @@
       <file leaf-file-name="Bricks.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Bricks.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="13" selection-start="1920" selection-end="1920" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="975">
+            <state line="56" column="35" selection-start="2354" selection-end="2354" vertical-scroll-proportion="0.0" vertical-offset="145" max-vertical-offset="1005">
               <folding />
             </state>
           </provider>
@@ -98,11 +94,11 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/main.js" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/Balls.js" />
+        <option value="$PROJECT_DIR$/Main.js" />
         <option value="$PROJECT_DIR$/Bricks.js" />
         <option value="$PROJECT_DIR$/Paddles.js" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/Main.js" />
-        <option value="$PROJECT_DIR$/Balls.js" />
       </list>
     </option>
   </component>
@@ -261,19 +257,23 @@
       <created>1382153419678</created>
       <updated>1382153419678</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="added ball file">
+      <created>1382156387328</created>
+      <updated>1382156387328</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1680" height="968" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32966277" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32875144" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32983193" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12619048" sideWeight="0.67033726" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12619048" sideWeight="0.67124856" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32966277" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -302,7 +302,9 @@
     <MESSAGE value="added paddle" />
     <MESSAGE value="added bounding box" />
     <MESSAGE value="fixed movement and added camera rotation" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed movement and added camera rotation" />
+    <MESSAGE value="added ball file" />
+    <MESSAGE value="added some comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="added some comments" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -392,30 +394,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Balls.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="73" selection-end="73" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="165">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="0" selection-start="1321" selection-end="1321" vertical-scroll-proportion="0.0" vertical-offset="735" max-vertical-offset="2355">
+        <state line="107" column="8" selection-start="2698" selection-end="2698" vertical-scroll-proportion="0.0" vertical-offset="1455" max-vertical-offset="2355">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Bricks.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="13" selection-start="1920" selection-end="1920" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1105">
+        <state line="56" column="35" selection-start="2354" selection-end="2354" vertical-scroll-proportion="0.0" vertical-offset="145" max-vertical-offset="1005">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Paddles.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="127" selection-end="127" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="585">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Balls.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="73" selection-end="73" vertical-scroll-proportion="0.07100592" vertical-offset="0" max-vertical-offset="845">
+        <state line="29" column="42" selection-start="822" selection-end="822" vertical-scroll-proportion="0.77956986" vertical-offset="0" max-vertical-offset="585">
           <folding />
         </state>
       </provider>

@@ -64,15 +64,15 @@
     anim();
 
     function init() {
-
+        //create container and append to scene.
         container = document.createElement('div');
         container.id = "webgl";
         document.body.appendChild(container);
 
+        //setup scene and camera
         shared.renderer = new THREE.WebGLRenderer();
         shared.camera = new THREE.PerspectiveCamera(45, shared.width / shared.height, 0.1, 1000 );
         shared.scene = new THREE.Scene();
-
         shared.renderer.setClearColor(0x000000);
         shared.camera.position.z = 100;
         shared.scene.add(shared.camera);

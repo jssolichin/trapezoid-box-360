@@ -27,7 +27,7 @@ Paddles.prototype.getPos = function() {
     return {x: this.geometry.position.x, y: this.geometry.position.y, z: this.geometry.position.z};
 };
 
-Paddles.prototype.incrementPos = function(increment) {
+Paddles.prototype.incrementPos = function (increment) {
     this.geometry.position.x += increment.x || 0;
     this.geometry.position.y += increment.y || 0;
     this.geometry.position.z += increment.z || 0;
