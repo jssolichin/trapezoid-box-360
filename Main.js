@@ -112,8 +112,9 @@
         shared.scene.add(ball.geometry);
 
         window.addEventListener('mousemove', onMouseMove, false);
-        window.addEventListener('keydown', handleKeyPresses, false);
-        window.addEventListener('keyup', handleKeyPresses, false);
+        window.addEventListener('click', onClick, false);
+        window.addEventListener('keydown', handleKeyPresses(1), false);
+        window.addEventListener('keyup', handleKeyPresses(0), false);
 
     }
 
@@ -155,24 +156,35 @@
         shared.mouseY = event.clientY;
     }
 
-    function handleKeyPresses(event) {
-        var key = String.fromCharCode(event.keyCode);
-        if (key == 'W') {
-            shared.pressedKeys[0] = shared.pressedKeys[0] == 0 ? 1 : 0;
-        }
-        if (key == 'A') {
-            shared.pressedKeys[1] = shared.pressedKeys[1] == 0 ? 1 : 0;
-        }
-        if (key == 'S') {
-            shared.pressedKeys[2] = shared.pressedKeys[2] == 0 ? 1 : 0;
-        }
-        if (key == 'D') {
-            shared.pressedKeys[3] = shared.pressedKeys[3] == 0 ? 1 : 0;
+    function onClick(event) {
+        console.log(shared.pressedKeys);
+    }
+
+    function handleKeyPresses(direction) {
+        return function (event) {
+            var key = String.fromCharCode(event.keyCode);
+            if (key == 'W') {
+                shared.pressedKeys[0] = direction;
+                shared.pressedKeys[2] = 0;
+            }
+            if (key == 'A') {
+                shared.pressedKeys[1] = direction;
+                shared.pressedKeys[3] = 0;
+            }
+            if (key == 'S') {
+                shared.pressedKeys[2] = direction;
+                shared.pressedKeys[0] = 0;
+            }
+            if (key == 'D') {
+                shared.pressedKeys[3] = direction;
+                shared.pressedKeys[1] = 0;
+            }
+
+            if (key == 'T') {
+                shared.signals.blockHit.dispatch(2);
+            }
         }
 
-        if (key == 'T') {
-            shared.signals.blockHit.dispatch(2);
-        }
 
     }
 
