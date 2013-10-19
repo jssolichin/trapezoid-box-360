@@ -20,7 +20,7 @@ var Bricks = function(shared) {
     //function to generate individual brick
     function generateBrick(width, height, depth, material, separation) {
         var geometry = new THREE.CubeGeometry(width, height, depth);
-        var material = material || new THREE.MeshBasicMaterial({wireframe: true});
+        material = material || new THREE.MeshBasicMaterial({wireframe: true});
         var brick = new THREE.Mesh(geometry, material);
         return function (id) {
             this.mesh = brick;

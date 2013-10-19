@@ -6,7 +6,7 @@
  */
 (function () {
 
-    var container, bricks, paddle, boundingBox, ball;
+    var container, bricks, paddle, boundingBox, ball, Signal = signals.Signal;
     var shared = {
         width: window.innerWidth,
         height: window.innerHeight,
@@ -61,6 +61,9 @@
                 depth: 5
             },
             paddlespeed: 0.3
+        },
+        signals: {
+            blockHit: new Signal()
         },
         util: {
             combine: function (rule) {
