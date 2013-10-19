@@ -26,6 +26,7 @@ Balls.prototype.update = function (bounding) {
     this.geometry.position.add(this.velocity);
 };
 
-Balls.prototype.checkBounce = function(position, boundheight, boundoffset) {
-    return (position + this.radius > boundheight / 2 + boundoffset || position - this.radius < -boundheight / 2 + boundoffset);
+Balls.prototype.checkBounce = function (position, boundheight, boundoffset) {
+    return (position + this.radius > boundheight / 2 + boundoffset ||
+            position - this.radius < -boundheight / 2 + boundoffset);
 };

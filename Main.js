@@ -102,6 +102,8 @@
             shared.scene.add(b.mesh);
         });
 
+        bricks.setSignal(shared.signals, shared.scene);
+
         paddle = new Paddles(shared);
 
         ball = new Balls(shared);
@@ -166,6 +168,10 @@
         }
         if (key == 'D') {
             shared.pressedKeys[3] = shared.pressedKeys[3] == 0 ? 1 : 0;
+        }
+
+        if (key == 'T') {
+            shared.signals.blockHit.dispatch(2);
         }
 
     }
