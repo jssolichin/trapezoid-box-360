@@ -9,6 +9,7 @@
     <option maxerr="50" />
     <option plusplus="true" />
     <option sloppy="true" />
+    <option undef="true" />
     <option vars="true" />
   </component>
 </project>

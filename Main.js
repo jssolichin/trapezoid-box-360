@@ -15,6 +15,11 @@
         key: '',
         parameters: {
             ballsize: 2,
+            ballspeed: {
+                x: (Math.random() - 0.5) * 0.5,
+                y: (Math.random() + 0.5) * 0.5,
+                z: (Math.random() - 0.5) * 0.5
+            },
             bounding: {
                 width: 50,
                 height: 50,
@@ -55,11 +60,11 @@
             paddlespeed: 0.3
         },
         util: {
-            combine: function(rule) {
+            combine: function (rule) {
                 return rule.apply(this, [].slice.call(arguments, 1));
             }
         }
-    }
+    };
 
     init();
     anim();
@@ -72,7 +77,7 @@
 
         //setup scene and camera
         shared.renderer = new THREE.WebGLRenderer();
-        shared.camera = new THREE.PerspectiveCamera(45, shared.width / shared.height, 0.1, 1000 );
+        shared.camera = new THREE.PerspectiveCamera(45, shared.width / shared.height, 0.1, 1000);
         shared.scene = new THREE.Scene();
         shared.renderer.setClearColor(0x000000);
         shared.camera.position.z = 100;
@@ -106,10 +111,11 @@
 
     function anim() {
         requestAnimationFrame(anim);
-        shared.camera.position.x = -shared.mouseX * 0.01 + 10;
+        shared.camera.position.x = -shared.mouseX * 0.1 + 10;
         shared.camera.lookAt(shared.scene.position);
 
         computePaddle(paddle, shared.key);
+        ball.update(shared.parameters.bounding);
 
 
         shared.renderer.render(shared.scene, shared.camera);
@@ -149,7 +155,7 @@
         shared.mouseY = event.clientY;
     }
 
-    function onKeyPress(event){
+    function onKeyPress(event) {
         shared.key = String.fromCharCode(event.keyCode);
     }
 
