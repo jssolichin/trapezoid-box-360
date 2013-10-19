@@ -50,7 +50,8 @@
                 width: 10,
                 height: 2,
                 depth: 5
-            }
+            },
+            paddlespeed: 0.3
         },
         util: {
             combine: function(rule) {
@@ -93,7 +94,7 @@
 
         shared.scene.add(paddle.geometry);
 
-        //window.addEventListener('mousemove', onMouseMove, false);
+        window.addEventListener('mousemove', onMouseMove, false);
         window.addEventListener('keypress', onKeyPress, false);
         window.addEventListener('keyup', function() { shared.key = ''}, false);
 
@@ -101,13 +102,11 @@
 
     function anim() {
         requestAnimationFrame(anim);
-        shared.camera.position.x = shared.mouseX;
-        shared.camera.position.y = shared.mouseY;
+        shared.camera.position.x = -shared.mouseX * 0.01 + 10;
+        //shared.camera.position.y = shared.mouseY;
         shared.camera.lookAt(shared.scene.position);
 
-        if (shared.key == 'w') {
-            paddle.incrementPos({z: 0.1});
-        }
+        computePaddle(paddle, shared.key);
         //console.log(shared.key);
 
         shared.renderer.render(shared.scene, shared.camera);
@@ -132,6 +131,21 @@
         this.geometry = boundingBox.clone();
 
     }
+
+    function computePaddle(paddle, key) {
+        var movement = {x:0, y:0, z:0};
+        if (key == 'w') {
+            movement.z = -shared.parameters.paddlespeed;
+        } if (key == 's') {
+            movement.z = shared.parameters.paddlespeed;
+        } if (key == 'd') {
+            movement.x = shared.parameters.paddlespeed;
+        } if (key == 'a') {
+            movement.x = -shared.parameters.paddlespeed;
+        }
+        console.log(movement);
+        paddle.incrementPos(movement);
+    };
 
     function onMouseMove(event) {
         shared.mouseX = event.clientX;
