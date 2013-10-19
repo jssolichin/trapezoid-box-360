@@ -12,6 +12,7 @@
         height: window.innerHeight,
         mouseX: 0,
         mouseY: 0,
+        key: '',
         parameters: {
             bounding: {
                 width: 50,
@@ -92,10 +93,9 @@
 
         shared.scene.add(paddle.geometry);
 
-
-
-
         //window.addEventListener('mousemove', onMouseMove, false);
+        window.addEventListener('keypress', onKeyPress, false);
+        window.addEventListener('keyup', function() { shared.key = ''}, false);
 
     }
 
@@ -104,6 +104,11 @@
         shared.camera.position.x = shared.mouseX;
         shared.camera.position.y = shared.mouseY;
         shared.camera.lookAt(shared.scene.position);
+
+        if (shared.key == 'w') {
+            paddle.incrementPos({z: 0.1});
+        }
+        //console.log(shared.key);
 
         shared.renderer.render(shared.scene, shared.camera);
 
@@ -131,6 +136,10 @@
     function onMouseMove(event) {
         shared.mouseX = event.clientX;
         shared.mouseY = event.clientY;
+    }
+
+    function onKeyPress(event){
+        shared.key = String.fromCharCode(event.keyCode);
     }
 
 }());

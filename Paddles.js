@@ -15,7 +15,20 @@ var Paddles = function(shared) {
 
     this.geometry = paddle.clone();
 
-
-
-
 };
+
+Paddles.prototype.updatePos = function(x, y, z) {
+    this.geometry.position.x = x;
+    this.geometry.position.y = y;
+    this.geometry.position.z = z;
+};
+
+Paddles.prototype.getPos = function() {
+    return {x: this.geometry.position.x, y: this.geometry.position.y, z: this.geometry.position.z};
+};
+
+Paddles.prototype.incrementPos = function(increment) {
+    this.geometry.position.x += increment.x || 0;
+    this.geometry.position.y += increment.y || 0;
+    this.geometry.position.z += increment.z || 0;
+}
