@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c1fa1097-c59a-400d-9f6d-c4c903a3e90f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main.js" afterPath="$PROJECT_DIR$/Main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Paddles.js" afterPath="$PROJECT_DIR$/Paddles.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bricks.js" afterPath="$PROJECT_DIR$/Bricks.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Yholo.iws" />
@@ -27,10 +26,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Main.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Main.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="158" column="26" selection-start="4529" selection-end="4534" vertical-scroll-proportion="0.33333334" vertical-offset="2184" max-vertical-offset="2940">
+            <state line="104" column="55" selection-start="2657" selection-end="2657" vertical-scroll-proportion="0.0" vertical-offset="1270" max-vertical-offset="2940">
               <folding />
             </state>
           </provider>
@@ -54,10 +53,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Bricks.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Bricks.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Bricks.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="38" selection-start="1381" selection-end="1381" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1155">
+            <state line="74" column="2" selection-start="2826" selection-end="2826" vertical-scroll-proportion="0.89349115" vertical-offset="355" max-vertical-offset="1200">
               <folding />
             </state>
           </provider>
@@ -95,9 +94,9 @@
         <option value="$PROJECT_DIR$/main.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/Balls.js" />
-        <option value="$PROJECT_DIR$/Bricks.js" />
         <option value="$PROJECT_DIR$/Paddles.js" />
         <option value="$PROJECT_DIR$/Main.js" />
+        <option value="$PROJECT_DIR$/Bricks.js" />
       </list>
     </option>
   </component>
@@ -296,14 +295,18 @@
       <created>1382220570148</created>
       <updated>1382220570148</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="started using paddlespeed parameter">
+      <created>1382220832383</created>
+      <updated>1382220832383</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1680" height="968" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32875144" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32875144" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32983193" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -348,7 +351,8 @@
     <MESSAGE value="function to remove bricks." />
     <MESSAGE value="possible runaway paddle fix" />
     <MESSAGE value="started using paddlespeed parameter" />
-    <option name="LAST_COMMIT_MESSAGE" value="started using paddlespeed parameter" />
+    <MESSAGE value="brick id to index function" />
+    <option name="LAST_COMMIT_MESSAGE" value="brick id to index function" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -438,9 +442,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Bricks.js">
+    <entry file="file://$PROJECT_DIR$/Balls.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="38" selection-start="1381" selection-end="1381" vertical-scroll-proportion="0.0" vertical-offset="250" max-vertical-offset="1155">
+        <state line="31" column="2" selection-start="1202" selection-end="1202" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="555">
           <folding />
         </state>
       </provider>
@@ -452,16 +456,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Balls.js">
+    <entry file="file://$PROJECT_DIR$/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="2" selection-start="1202" selection-end="1202" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="555">
+        <state line="104" column="55" selection-start="2657" selection-end="2657" vertical-scroll-proportion="0.0" vertical-offset="1270" max-vertical-offset="2940">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main.js">
+    <entry file="file://$PROJECT_DIR$/Bricks.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="158" column="26" selection-start="4529" selection-end="4534" vertical-scroll-proportion="0.33333334" vertical-offset="2184" max-vertical-offset="2940">
+        <state line="74" column="2" selection-start="2826" selection-end="2826" vertical-scroll-proportion="0.89349115" vertical-offset="355" max-vertical-offset="1200">
           <folding />
         </state>
       </provider>

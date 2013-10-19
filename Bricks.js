@@ -35,16 +35,12 @@ var Bricks = function (shared) {
         var Brick = fn;
         var bricks = [];
         (function () {
-            for (var x = 0, y = 0, z = 0; x < dim.x; x++) {
-                for ( y = 0; y < dim.y; y++){
-                    for( z = 0; z < dim.z; z++) {
-                        var brick = new Brick({x: x, y: y, z: z});
-                        brick.mesh.position = new THREE.Vector3(x * brick.width - (csize.width / 2),
-                            y * brick.height + offset.y, z * brick.depth);
-                        brick.mesh = brick.mesh.clone();
-                        bricks.push(brick);
-                    }
-                }
+            for (var x = 0, y = 0, z = 0; x < dim.x; x++) for (y = 0; y < dim.y; y++) for (z = 0; z < dim.z; z++) {
+                var brick = new Brick({x: x, y: y, z: z});
+                brick.mesh.position = new THREE.Vector3(x * brick.width - (csize.width / 2),
+                    y * brick.height + offset.y, z * brick.depth);
+                brick.mesh = brick.mesh.clone();
+                bricks.push(brick);
             }
         }());
         return bricks;
@@ -52,6 +48,8 @@ var Bricks = function (shared) {
 
     this.brickList = shared.util.combine(setup, generateBrick, generateWall, shared.parameters.bricksize,
         shared.parameters.brickspacing, shared.parameters.bricklayout, shared.parameters.brickoffsets);
+
+    this.brickLayout = shared.parameters.bricklayout;
 };
 
 //function to update all the bricks
@@ -59,7 +57,7 @@ Bricks.prototype.update = function(fn) {
     this.brickList.forEach(function(b) {
         fn(b);
     });
-}
+};
 
 Bricks.prototype.setSignal = function (signals, scene) {
     var self = this;
@@ -69,4 +67,9 @@ Bricks.prototype.setSignal = function (signals, scene) {
             delete(self.brickList[idx]);
         }
     });
-}
+};
+
+Bricks.prototype.idToIdx = function (id) {
+    return (id.z + id.y * this.brickLayout.z + id.x * this.brickLayout.y * this.brickLayout.x) + 1;
+
+};
