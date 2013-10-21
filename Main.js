@@ -102,6 +102,10 @@
             shared.scene.add(b.mesh);
         });
 
+        console.log(bricks.brickList[3].getBounding());
+
+        console.log(bricks);
+
         bricks.setSignal(shared.signals, shared.scene);
 
         paddle = new Paddles(shared);
@@ -125,6 +129,17 @@
 
         computePaddle(paddle, shared.pressedKeys);
         ball.update(shared.parameters.bounding);
+
+        bricks.update(function (b) {
+            var ballpos = ball.getPosition();
+            var bx = ballpos.x, by = ballpos.y, bz = ballpos.z;
+            var brickbound = b.getBounding();
+            var bminx = brickbound.x.min, bmaxx = brickbound.x.max, bminy = brickbound.y.min, bmaxy = brickbound.y.max,
+                bminz = brickbound.z.min, bmaxz = brickbound.z.max;
+            if (bx > bminx && bx < bmaxx && by > bminy && by < bmaxy && bz > bminz && bz < bmaxz) {
+                shared.signals.blockHit.dispatch(b.idx);
+            }
+        });
 
         shared.renderer.render(shared.scene, shared.camera);
     }

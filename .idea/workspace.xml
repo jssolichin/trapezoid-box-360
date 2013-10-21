@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c1fa1097-c59a-400d-9f6d-c4c903a3e90f" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Balls.js" afterPath="$PROJECT_DIR$/Balls.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bricks.js" afterPath="$PROJECT_DIR$/Bricks.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main.js" afterPath="$PROJECT_DIR$/Main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Yholo.iws" />
@@ -26,10 +28,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Main.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Main.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="104" column="55" selection-start="2657" selection-end="2657" vertical-scroll-proportion="0.0" vertical-offset="1270" max-vertical-offset="2940">
+            <state line="139" column="56" selection-start="4239" selection-end="4239" vertical-scroll-proportion="0.4519972" vertical-offset="1718" max-vertical-offset="3502">
               <folding />
             </state>
           </provider>
@@ -38,7 +40,7 @@
       <file leaf-file-name="Balls.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Balls.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="2" selection-start="1202" selection-end="1202" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="555">
+            <state line="36" column="0" selection-start="1351" selection-end="1351" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714">
               <folding />
             </state>
           </provider>
@@ -47,16 +49,16 @@
       <file leaf-file-name="Paddles.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Paddles.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="23" selection-start="117" selection-end="117" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="585">
+            <state line="17" column="2" selection-start="479" selection-end="479" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Bricks.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Bricks.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Bricks.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="2" selection-start="2826" selection-end="2826" vertical-scroll-proportion="0.89349115" vertical-offset="355" max-vertical-offset="1200">
+            <state line="62" column="2" selection-start="2898" selection-end="2898" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1462">
               <folding />
             </state>
           </provider>
@@ -65,7 +67,7 @@
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="51" selection-start="491" selection-end="491" vertical-scroll-proportion="-8.75" vertical-offset="0" max-vertical-offset="330">
+            <state line="14" column="51" selection-start="491" selection-end="491" vertical-scroll-proportion="-9.153846" vertical-offset="0" max-vertical-offset="374">
               <folding />
             </state>
           </provider>
@@ -93,17 +95,18 @@
       <list>
         <option value="$PROJECT_DIR$/main.js" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/Balls.js" />
         <option value="$PROJECT_DIR$/Paddles.js" />
-        <option value="$PROJECT_DIR$/Main.js" />
         <option value="$PROJECT_DIR$/Bricks.js" />
+        <option value="$PROJECT_DIR$/Main.js" />
+        <option value="$PROJECT_DIR$/Balls.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="22" />
-    <option name="width" value="1680" />
-    <option name="height" value="968" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="2576" />
+    <option name="height" value="1586" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -176,10 +179,18 @@
     <property name="options.lastSelected" value="Settings.JavaScript.Linters.JSLint" />
     <property name="last_opened_file_path" value="C:/Program Files (x86)/Git/bin/git.exe" />
     <property name="FullScreen" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RunManager">
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -188,14 +199,6 @@
       <option name="saveOutputToFile" value="false" />
       <option name="showConsoleOnStdErr" value="false" />
       <option name="showConsoleOnStdOut" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <option name="VMOptions" />
-      <option name="arguments" />
-      <option name="filePath" />
-      <option name="scope" value="ALL" />
-      <option name="testName" />
       <method />
     </configuration>
     <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
@@ -299,11 +302,15 @@
       <created>1382220832383</created>
       <updated>1382220832383</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="moved idToIdx function to utils">
+      <created>1382337163549</created>
+      <updated>1382337163549</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1680" height="968" extended-state="6" />
+    <frame x="-8" y="-8" width="2576" height="1586" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32875144" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -311,7 +318,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12619048" sideWeight="0.67124856" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12617187" sideWeight="0.67124856" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32966277" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -352,7 +359,8 @@
     <MESSAGE value="possible runaway paddle fix" />
     <MESSAGE value="started using paddlespeed parameter" />
     <MESSAGE value="brick id to index function" />
-    <option name="LAST_COMMIT_MESSAGE" value="brick id to index function" />
+    <MESSAGE value="moved idToIdx function to utils" />
+    <option name="LAST_COMMIT_MESSAGE" value="moved idToIdx function to utils" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -435,37 +443,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="51" selection-start="491" selection-end="491" vertical-scroll-proportion="-8.75" vertical-offset="0" max-vertical-offset="330">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Balls.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="2" selection-start="1202" selection-end="1202" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="555">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Paddles.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="23" selection-start="117" selection-end="117" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="585">
+        <state line="17" column="2" selection-start="479" selection-end="479" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main.js">
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="55" selection-start="2657" selection-end="2657" vertical-scroll-proportion="0.0" vertical-offset="1270" max-vertical-offset="2940">
+        <state line="14" column="51" selection-start="491" selection-end="491" vertical-scroll-proportion="-9.153846" vertical-offset="0" max-vertical-offset="374">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Bricks.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="2" selection-start="2826" selection-end="2826" vertical-scroll-proportion="0.89349115" vertical-offset="355" max-vertical-offset="1200">
+        <state line="62" column="2" selection-start="2898" selection-end="2898" vertical-scroll-proportion="0.0" vertical-offset="35" max-vertical-offset="1462">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Balls.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="0" selection-start="1351" selection-end="1351" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="139" column="56" selection-start="4239" selection-end="4239" vertical-scroll-proportion="0.4519972" vertical-offset="1718" max-vertical-offset="3502">
           <folding />
         </state>
       </provider>

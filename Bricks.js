@@ -22,9 +22,10 @@ var Bricks = function (shared) {
         var geometry = new THREE.CubeGeometry(width, height, depth);
         material = material || new THREE.MeshBasicMaterial({wireframe: true});
         var brick = new THREE.Mesh(geometry, material);
-        return function (id) {
+        return function (id, idx) {
             this.mesh = brick;
             this.id = id;
+            this.idx = idx;
             this.width = separation ? separation.x + this.mesh.geometry.width : this.mesh.geometry.width;
             this.height = separation ? separation.y + this.mesh.geometry.height : this.mesh.geometry.height;
             this.depth = separation ? separation.z + this.mesh.geometry.depth : this.mesh.geometry.depth;
@@ -35,8 +36,17 @@ var Bricks = function (shared) {
         var Brick = fn;
         var bricks = [];
         (function () {
-            for (var x = 0, y = 0, z = 0; x < dim.x; x++) for (y = 0; y < dim.y; y++) for (z = 0; z < dim.z; z++) {
-                var brick = new Brick({x: x, y: y, z: z});
+            Brick.prototype.getBounding = function () {
+                var x = {min: this.mesh.position.x - this.mesh.geometry.width / 2,
+                    max: this.mesh.position.x + this.mesh.geometry.width / 2};
+                var y = {min: this.mesh.position.y - this.mesh.geometry.height / 2,
+                    max: this.mesh.position.y + this.mesh.geometry.height / 2};
+                var z = {min: this.mesh.position.z - this.mesh.geometry.depth / 2,
+                    max: this.mesh.position.z + this.mesh.geometry.depth / 2};
+                return {x: x, y: y, z: z};
+            };
+            for (var x = 0, y = 0, z = 0, i = 0; x < dim.x; x++) for (y = 0; y < dim.y; y++) for (z = 0; z < dim.z; z++) {
+                var brick = new Brick({x: x, y: y, z: z}, i++);
                 brick.mesh.position = new THREE.Vector3(x * brick.width - (csize.width / 2),
                     y * brick.height + offset.y, z * brick.depth);
                 brick.mesh = brick.mesh.clone();

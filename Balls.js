@@ -30,3 +30,7 @@ Balls.prototype.checkBounce = function (position, boundheight, boundoffset) {
     return (position + this.radius > boundheight / 2 + boundoffset ||
             position - this.radius < -boundheight / 2 + boundoffset);
 };
+
+Balls.prototype.getPosition = function () {
+    return {x: this.geometry.position.x, y: this.geometry.position.y, z: this.geometry.position.z};
+};
