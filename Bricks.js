@@ -50,6 +50,7 @@ var Bricks = function (shared) {
                 brick.mesh.position = new THREE.Vector3(x * brick.width - (csize.width / 2),
                     y * brick.height + offset.y, z * brick.depth);
                 brick.mesh = brick.mesh.clone();
+                brick.mesh.idx = i - 1;
                 bricks.push(brick);
             }
         }());

@@ -34,3 +34,14 @@ Balls.prototype.checkBounce = function (position, boundheight, boundoffset) {
 Balls.prototype.getPosition = function () {
     return {x: this.geometry.position.x, y: this.geometry.position.y, z: this.geometry.position.z};
 };
+
+Balls.prototype.bounce = function (direction) {
+    /*
+    this.velocity[side] = this.velocity[side] * -1;
+    this.geometry.position.add(this.velocity);
+    */
+    this.velocity.y = direction.y * -1;
+    this.velocity.x = direction.x * -1;
+    this.velocity.z = direction.z * -1;
+
+};

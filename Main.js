@@ -13,6 +13,7 @@
         mouseX: 0,
         mouseY: 0,
         pressedKeys: [0, 0, 0, 0],
+        collidableMeshList: [],
         parameters: {
             ballsize: 2,
             ballspeed: {
@@ -68,6 +69,41 @@
             idToIdx: function (id) {
                 return (id.z + id.y * shared.parameters.bricklayout.z +
                     id.x * shared.parameters.bricklayout.y * shared.parameters.bricklayout.x) + 1;
+            },
+            brickbounce: (function () {
+                var x, y, z;
+                x = y = z = false;
+                return function (c1, c2, c3) {
+                    var result = void 0;
+                    if (x && c1) {
+                        result = "x";
+                    } else if (y && c2) {
+                        result = "y";
+                    } else if (z && c3) {
+                        result = "z";
+                    }
+                    if (result == void 0) {
+                        z = c1 && c2 ? true : false;
+                        y = c1 && c3 ? true : false;
+                        x = c2 && c3 ? true : false;
+                    } else {
+                        x = y = z = false;
+                    }
+                    return result;
+                };
+            }()),
+            maybe: function (fn) {
+                return function () {
+                    var i;
+                    if (arguments.length == 0) {
+                        return;
+                    } else {
+                        for (i = 0; i < arguments.length; i++) {
+                            if (arguments[i] == null) return;
+                        }
+                        return fn.apply(this, arguments);
+                    }
+                };
             }
         }
     };
@@ -100,16 +136,15 @@
 
         bricks.update(function (b) {
             shared.scene.add(b.mesh);
+            shared.collidableMeshList.push(b.mesh);
         });
 
         console.log(bricks.brickList[3].getBounding());
-
-        console.log(bricks);
-
         bricks.setSignal(shared.signals, shared.scene);
 
         paddle = new Paddles(shared);
 
+        Balls.prototype.bounce = shared.util.maybe(Balls.prototype.bounce);
         ball = new Balls(shared);
 
         shared.scene.add(paddle.geometry);
@@ -129,17 +164,22 @@
 
         computePaddle(paddle, shared.pressedKeys);
         ball.update(shared.parameters.bounding);
+        var origin = ball.geometry.position.clone();
+        for (var vtxIdx = 0; vtxIdx < ball.geometry.geometry.vertices.length ; vtxIdx++) {
+            var lvtx = ball.geometry.geometry.vertices[vtxIdx].clone();
+            var gvtx = lvtx.applyMatrix4(ball.geometry.matrix);
+            var direction = gvtx.sub(ball.geometry.position);
 
-        bricks.update(function (b) {
-            var ballpos = ball.getPosition();
-            var bx = ballpos.x, by = ballpos.y, bz = ballpos.z;
-            var brickbound = b.getBounding();
-            var bminx = brickbound.x.min, bmaxx = brickbound.x.max, bminy = brickbound.y.min, bmaxy = brickbound.y.max,
-                bminz = brickbound.z.min, bmaxz = brickbound.z.max;
-            if (bx > bminx && bx < bmaxx && by > bminy && by < bmaxy && bz > bminz && bz < bmaxz) {
-                shared.signals.blockHit.dispatch(b.idx);
+            var ray = new THREE.Raycaster( origin, direction.clone().normalize());
+            var results = ray.intersectObjects( shared.collidableMeshList);
+            if (results.length > 0 && results[0].distance < direction.length()) {
+                ball.bounce(direction.clone().normalize().multiplyScalar(.5));
+
+                var hit = results[0].object.idx;
+                shared.signals.blockHit.dispatch(hit);
+                delete shared.collidableMeshList[hit];
             }
-        });
+        }
 
         shared.renderer.render(shared.scene, shared.camera);
     }

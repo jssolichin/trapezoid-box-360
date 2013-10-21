@@ -31,7 +31,7 @@
       <file leaf-file-name="Main.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="139" column="56" selection-start="4239" selection-end="4239" vertical-scroll-proportion="0.4519972" vertical-offset="1718" max-vertical-offset="3502">
+            <state line="153" column="38" selection-start="4649" selection-end="4649" vertical-scroll-proportion="0.3051948" vertical-offset="2178" max-vertical-offset="4182">
               <folding />
             </state>
           </provider>
@@ -40,7 +40,7 @@
       <file leaf-file-name="Balls.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Balls.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="0" selection-start="1351" selection-end="1351" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714">
+            <state line="44" column="38" selection-start="1631" selection-end="1631" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="884">
               <folding />
             </state>
           </provider>
@@ -58,7 +58,7 @@
       <file leaf-file-name="Bricks.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Bricks.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="62" column="2" selection-start="2898" selection-end="2898" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1462">
+            <state line="52" column="38" selection-start="2575" selection-end="2575" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="1479">
               <folding />
             </state>
           </provider>
@@ -96,17 +96,17 @@
         <option value="$PROJECT_DIR$/main.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/Paddles.js" />
+        <option value="$PROJECT_DIR$/Balls.js" />
         <option value="$PROJECT_DIR$/Bricks.js" />
         <option value="$PROJECT_DIR$/Main.js" />
-        <option value="$PROJECT_DIR$/Balls.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="2576" />
-    <option name="height" value="1586" />
+    <option name="x" value="1140" />
+    <option name="y" value="8" />
+    <option name="width" value="1280" />
+    <option name="height" value="1570" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -306,19 +306,24 @@
       <created>1382337163549</created>
       <updated>1382337163549</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="destroy bricks on ball contact">
+      <created>1382390495373</created>
+      <updated>1382390495373</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2576" height="1586" extended-state="6" />
+    <frame x="1140" y="8" width="1280" height="1570" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32875144" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32846206" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32983193" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3256785" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12617187" sideWeight="0.67124856" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.255538" sideWeight="0.67153794" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32966277" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -327,7 +332,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -360,7 +364,9 @@
     <MESSAGE value="started using paddlespeed parameter" />
     <MESSAGE value="brick id to index function" />
     <MESSAGE value="moved idToIdx function to utils" />
-    <option name="LAST_COMMIT_MESSAGE" value="moved idToIdx function to utils" />
+    <MESSAGE value="destroy bricks on ball contact" />
+    <MESSAGE value=" raycasting to determine collision;  bounce after brick hit" />
+    <option name="LAST_COMMIT_MESSAGE" value=" raycasting to determine collision;  bounce after brick hit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -459,21 +465,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Bricks.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="2" selection-start="2898" selection-end="2898" vertical-scroll-proportion="0.0" vertical-offset="35" max-vertical-offset="1462">
+        <state line="52" column="38" selection-start="2575" selection-end="2575" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="1479">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Balls.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="0" selection-start="1351" selection-end="1351" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714">
+        <state line="44" column="38" selection-start="1631" selection-end="1631" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="884">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="139" column="56" selection-start="4239" selection-end="4239" vertical-scroll-proportion="0.4519972" vertical-offset="1718" max-vertical-offset="3502">
+        <state line="153" column="38" selection-start="4649" selection-end="4649" vertical-scroll-proportion="0.3051948" vertical-offset="2178" max-vertical-offset="4182">
           <folding />
         </state>
       </provider>
