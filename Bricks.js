@@ -68,8 +68,3 @@ Bricks.prototype.setSignal = function (signals, scene) {
         }
     });
 };
-
-Bricks.prototype.idToIdx = function (id) {
-    return (id.z + id.y * this.brickLayout.z + id.x * this.brickLayout.y * this.brickLayout.x) + 1;
-
-};

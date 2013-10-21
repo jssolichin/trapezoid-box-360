@@ -36,25 +36,21 @@
                 height: 5,
                 depth: 5
             },
-
             brickspacing: {
                 x: 2,
                 y: 2,
                 z: 2
             },
-
             bricklayout: {
                 x: 3,
                 y: 3,
                 z: 3
             },
-
             brickoffsets: {
                 x: 0,
                 y: 10,
                 z: 0
             },
-
             paddlesize: {
                 width: 10,
                 height: 2,
@@ -68,6 +64,10 @@
         util: {
             combine: function (rule) {
                 return rule.apply(this, [].slice.call(arguments, 1));
+            },
+            idToIdx: function (id) {
+                return (id.z + id.y * shared.parameters.bricklayout.z +
+                    id.x * shared.parameters.bricklayout.y * shared.parameters.bricklayout.x) + 1;
             }
         }
     };
@@ -126,10 +126,7 @@
         computePaddle(paddle, shared.pressedKeys);
         ball.update(shared.parameters.bounding);
 
-
         shared.renderer.render(shared.scene, shared.camera);
-
-
     }
 
     function BoundingBox(shared) {
@@ -184,8 +181,6 @@
                 shared.signals.blockHit.dispatch(2);
             }
         };
-
-
     }
 
 }());
