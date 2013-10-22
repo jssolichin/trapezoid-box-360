@@ -11,7 +11,7 @@ var Paddles = function (shared) {
     var material = new THREE.MeshBasicMaterial({wireframe: true});
     var paddle = new THREE.Mesh(geometry, material);
 
-    paddle.position.y = -20;
+    paddle.position.y = -19;
 
     this.geometry = paddle.clone();
 

@@ -17,17 +17,17 @@
         parameters: {
             ballsize: 2,
             ballspeed: {
-                x: (Math.random() - 0.5) * 0.5,
-                y: (Math.random() + 0.5) * 0.5,
-                z: (Math.random() - 0.5) * 0.5
+                x: (Math.random() - 0.5),
+                y: (Math.random() + 0.5),
+                z: (Math.random() - 0.5)
             },
             bounding: {
                 width: 50,
                 height: 50,
-                depth: 50,
+                depth: 35,
                 x: -2,
                 y: 5,
-                z: 0,
+                z: 6,
                 sx: 5,
                 sy: 5,
                 sz: 5
@@ -178,13 +178,13 @@
             var results = ray.intersectObjects(shared.collidableMeshList);
             var paddleHit = ray.intersectObjects([paddle.geometry]);
             if (results.length > 0 && results[0].distance < direction.length()) {
-                ball.bounce(direction.clone().normalize().multiplyScalar(.5));
+                ball.bounce(direction.clone().normalize().multiplyScalar(0.9));
                 var hit = results[0].object.idx;
                 shared.signals.blockHit.dispatch(hit);
                 delete shared.collidableMeshList[hit];
             }
             if (paddleHit.length > 0 && paddleHit[0].distance < direction.length()) {
-                ball.bounce(direction.clone().normalize().multiplyScalar(0.5));
+                ball.bounce(direction.clone().normalize().multiplyScalar(0.9));
 
             }
         }
