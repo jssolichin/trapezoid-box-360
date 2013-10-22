@@ -159,8 +159,12 @@
 
     function anim() {
         requestAnimationFrame(anim);
-        shared.camera.position.x = -shared.mouseX * 0.1 + 10;
+        //shared.camera.position.x = -shared.mouseX * 0.1 + 10;
+
+        shared.camera.position.x = 100 * Math.cos(shared.mouseX * 0.01);
+        shared.camera.position.z = 100 * Math.sin(shared.mouseX * 0.01);
         shared.camera.lookAt(shared.scene.position);
+
 
         computePaddle(paddle, shared.pressedKeys);
         ball.update(shared.parameters.bounding);
@@ -170,14 +174,18 @@
             var gvtx = lvtx.applyMatrix4(ball.geometry.matrix);
             var direction = gvtx.sub(ball.geometry.position);
 
-            var ray = new THREE.Raycaster( origin, direction.clone().normalize());
-            var results = ray.intersectObjects( shared.collidableMeshList);
+            var ray = new THREE.Raycaster(origin, direction.clone().normalize());
+            var results = ray.intersectObjects(shared.collidableMeshList);
+            var paddleHit = ray.intersectObjects([paddle.geometry]);
             if (results.length > 0 && results[0].distance < direction.length()) {
                 ball.bounce(direction.clone().normalize().multiplyScalar(.5));
-
                 var hit = results[0].object.idx;
                 shared.signals.blockHit.dispatch(hit);
                 delete shared.collidableMeshList[hit];
+            }
+            if (paddleHit.length > 0 && paddleHit[0].distance < direction.length()) {
+                ball.bounce(direction.clone().normalize().multiplyScalar(0.5));
+
             }
         }
 
