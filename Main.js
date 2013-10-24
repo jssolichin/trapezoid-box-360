@@ -25,7 +25,7 @@
                 width: 50,
                 height: 50,
                 depth: 35,
-                x: -2,
+                x: 0,
                 y: 5,
                 z: 6,
                 sx: 5,
@@ -48,7 +48,7 @@
                 z: 3
             },
             brickoffsets: {
-                x: 0,
+                x: 2,
                 y: 10,
                 z: 0
             },
@@ -149,6 +149,7 @@
 
         shared.scene.add(paddle.geometry);
         shared.scene.add(ball.geometry);
+        shared.scene.add(ball.helperGeometry);
 
         window.addEventListener('mousemove', onMouseMove, false);
         window.addEventListener('click', onClick, false);
@@ -161,8 +162,8 @@
         requestAnimationFrame(anim);
         //shared.camera.position.x = -shared.mouseX * 0.1 + 10;
 
-        shared.camera.position.x = 100 * Math.cos(shared.mouseX * 0.01);
-        shared.camera.position.z = 100 * Math.sin(shared.mouseX * 0.01);
+        shared.camera.position.x = 100 * Math.cos((shared.mouseX / shared.width + 3) * 0.5);
+        shared.camera.position.z = 100 * Math.sin((shared.mouseX / shared.width + 3) * 0.5);
         shared.camera.lookAt(shared.scene.position);
 
 
@@ -184,7 +185,7 @@
                 delete shared.collidableMeshList[hit];
             }
             if (paddleHit.length > 0 && paddleHit[0].distance < direction.length()) {
-                ball.bounce(direction.clone().normalize().multiplyScalar(0.9));
+                ball.bounce(direction.clone ().normalize().multiplyScalar(0.9));
 
             }
         }
@@ -208,7 +209,7 @@
 
     function computePaddle(paddle, pressedKeys) {
         var movement = {x: pressedKeys[3] - pressedKeys[1], z: pressedKeys[2] - pressedKeys[0]};
-        paddle.incrementPos(movement);
+        paddle.incrementPos(movement, shared.parameters.bounding);
     }
 
     function onMouseMove(event) {

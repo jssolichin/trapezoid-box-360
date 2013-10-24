@@ -2,15 +2,30 @@
  * Created by alxlu on 10/18/13.
  */
 var Balls = function (shared) {
-    this.radius = shared.parameters.ballsize;
+    var p = shared.parameters;
+    this.radius = p.ballsize;
     var geometry = new THREE.SphereGeometry(this.radius);
     var material = new THREE.MeshBasicMaterial({wireframe: true});
     var mesh = new THREE.Mesh(geometry, material);
     this.geometry = mesh.clone();
 
+    var helperGeometry = new THREE.PlaneGeometry(p.bounding.width, p.bounding.depth / p.bounding.sz,
+        p.bounding.sx, p.bounding.sz);
 
-    this.velocity = new THREE.Vector3(shared.parameters.ballspeed.x, shared.parameters.ballspeed.y,
-        shared.parameters.ballspeed.z);
+    var helperMaterial = new THREE.MeshBasicMaterial({wireframe: true, color: 0x13bee9});
+
+    var helperMesh = new THREE.Mesh(helperGeometry, helperMaterial);
+
+    helperMesh.rotation.x = Math.PI / 2;
+    helperMesh.position.y = -20;
+    console.log(helperMesh);
+
+    this.helperGeometry = helperMesh.clone();
+
+
+
+    this.velocity = new THREE.Vector3(p.ballspeed.x, p.ballspeed.y,
+        p.ballspeed.z);
 };
 
 Balls.prototype.update = function (bounding) {
@@ -24,6 +39,8 @@ Balls.prototype.update = function (bounding) {
         this.velocity.z = this.velocity.z * -1;
     }
     this.geometry.position.add(this.velocity);
+
+    this.helperGeometry.position.z = this.geometry.position.z;
 };
 
 Balls.prototype.checkBounce = function (position, boundheight, boundoffset) {

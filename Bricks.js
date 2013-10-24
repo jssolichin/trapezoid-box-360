@@ -47,8 +47,8 @@ var Bricks = function (shared) {
             };
             for (var x = 0, y = 0, z = 0, i = 0; x < dim.x; x++) for (y = 0; y < dim.y; y++) for (z = 0; z < dim.z; z++) {
                 var brick = new Brick({x: x, y: y, z: z}, i++);
-                brick.mesh.position = new THREE.Vector3(x * brick.width - (csize.width / 2),
-                    y * brick.height + offset.y, z * brick.depth);
+                brick.mesh.position = new THREE.Vector3(x * brick.width - (csize.width / 2) + offset.x,
+                    y * brick.height + offset.y, z * brick.depth + offset.z);
                 brick.mesh = brick.mesh.clone();
                 brick.mesh.idx = i - 1;
                 bricks.push(brick);
