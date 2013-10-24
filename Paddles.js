@@ -14,7 +14,7 @@ var Paddles = function (shared) {
     paddle.position.y = -19;
 
     this.geometry = paddle.clone();
-
+    console.log(this.geometry);
 };
 
 Paddles.prototype.updatePos = function (x, y, z) {
@@ -29,8 +29,20 @@ Paddles.prototype.getPos = function () {
 
 Paddles.prototype.incrementPos = function (increment, bounding) {
     var pos = this.geometry.position;
+    var geo = this.geometry.geometry;
     pos.x += increment.x || 0;
     pos.y += increment.y || 0;
     pos.z += increment.z || 0;
+    if (pos.x + geo.width / 2 >= bounding.width / 2 + bounding.x) {
+        pos.x = bounding.width / 2 + bounding.x - geo.width / 2;
+    }
+    if (pos.x - geo.width / 2 <= -bounding.width / 2 + bounding.x) {
+        pos.x = -bounding.width / 2 + bounding.x + geo.width / 2;
+    }
+    if (pos.z + geo.depth / 2 >= bounding.depth / 2 + bounding.z) {
+        pos.z = bounding.depth / 2 + bounding.z - geo.depth / 2;
+    }
+    if (pos.z - geo.depth / 2 <= -bounding.depth / 2 + bounding.z) {
+        pos.z = -bounding.depth / 2 + bounding.z + geo.depth / 2;
+    }
 };
-
