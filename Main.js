@@ -33,24 +33,24 @@
                 sz: 5
             },
             bricksize: {
-                width: 10,
+                width: 20,
                 height: 5,
-                depth: 5
+                depth: 20
             },
             brickspacing: {
-                x: 2,
-                y: 2,
-                z: 2
+                x: 0,
+                y: 0,
+                z: 0
             },
             bricklayout: {
-                x: 3,
-                y: 3,
-                z: 3
+                x: 5,
+                y: 1,
+                z: 5
             },
             brickoffsets: {
-                x: 2,
-                y: 10,
-                z: 0
+                x: 5,
+                y: 27,
+                z: 1
             },
             paddlesize: {
                 width: 10,
@@ -140,7 +140,7 @@
         });
 
         console.log(bricks.brickList[3].getBounding());
-        bricks.setSignal(shared.signals, shared.scene);
+        bricks.setSignal(shared.signals, shared.scene, shared);
 
         paddle = new Paddles(shared);
 
@@ -181,8 +181,10 @@
             if (results.length > 0 && results[0].distance < direction.length()) {
                 ball.bounce(direction.clone().normalize().multiplyScalar(0.9));
                 var hit = results[0].object.idx;
+                var temp = shared.collidableMeshList[hit];
                 shared.signals.blockHit.dispatch(hit);
                 delete shared.collidableMeshList[hit];
+                setTimeout(function(){shared.collidableMeshList[hit] = temp}, 1000)
             }
             if (paddleHit.length > 0 && paddleHit[0].distance < direction.length()) {
                 ball.bounce(direction.clone ().normalize().multiplyScalar(0.9));

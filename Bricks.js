@@ -20,7 +20,7 @@ var Bricks = function (shared) {
     //function to generate individual brick
     function generateBrick(width, height, depth, material, separation) {
         var geometry = new THREE.CubeGeometry(width, height, depth);
-        material = material || new THREE.MeshBasicMaterial({wireframe: true});
+        var material = new THREE.MeshPhongMaterial( { color: 0x000000,  emissive: 0x000000, ambient: 0x000000, shading: THREE.SmoothShading, opacity: 0.8, transparent: true } ) 
         var brick = new THREE.Mesh(geometry, material);
         return function (id, idx) {
             this.mesh = brick;
@@ -70,12 +70,42 @@ Bricks.prototype.update = function(fn) {
     });
 };
 
-Bricks.prototype.setSignal = function (signals, scene) {
+Bricks.prototype.setSignal = function (signals, scene, shared) {
     var self = this;
-    signals.blockHit.add(function(idx) {
+   signals.blockHit.add(function(idx) {
         if (self.brickList[idx] != undefined) {
-            scene.remove(self.brickList[idx].mesh);
-            delete(self.brickList[idx]);
+            console.log(self.brickList[idx]);
+
+            var theColor = self.brickList[idx].mesh.material.emissive.clone();
+
+            if(theColor.r == 0)
+                theColor.r =1;
+            else if(theColor.g == 0)
+                theColor.g =1;
+            else if(theColor.b == 0)
+                theColor.b =1;
+            else {
+                //var newBrick = self.brickList[idx].clone();
+                var newBrick = {
+                    mesh: self.brickList[idx].mesh.clone(),
+                    id: {x: self.brickList[idx].x, y: self.brickList[idx].id.y+10, z: self.brickList[idx].id.z},
+                    depth: self.brickList[idx].depth,
+                    height: self.brickList[idx].height,
+                    width: self.brickList[idx].width,
+                    idx: shared.util.idToIdx({x: self.brickList[idx].x, y: self.brickList[idx].id.y+1, z: self.brickList[idx].id.z})
+                }
+                newBrick.mesh.position.y = self.brickList[idx].mesh.position.y-5;
+                newBrick.mesh.material = new THREE.MeshPhongMaterial( { color: 0x000000,  emissive: 0x000000, ambient: 0x000000, shading: THREE.SmoothShading, opacity: 0.8, transparent: true } )
+                newBrick.prototype = Bricks.prototype;
+                console.log(newBrick.prototype);
+                self.brickList[newBrick.idx] = newBrick;
+                shared.scene.add(newBrick.mesh);
+                shared.collidableMeshList.push(newBrick.mesh);
+            }
+
+            var newMaterial =  new THREE.MeshPhongMaterial( { color: 0x000000,  emissive: theColor, ambient: 0x000000, shading: THREE.SmoothShading, opacity: 0.8, transparent: true, needsUpdate:true } );
+            
+            self.brickList[idx].mesh.material = newMaterial;
         }
     });
 };
