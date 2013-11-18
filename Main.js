@@ -33,9 +33,9 @@
                 sz: 5
             },
             bricksize: {
-                width: 20,
+                width: 10,
                 height: 5,
-                depth: 20
+                depth: 10
             },
             brickspacing: {
                 x: 0,
@@ -49,7 +49,7 @@
             },
             brickoffsets: {
                 x: 5,
-                y: 27,
+                y: 25,
                 z: 1
             },
             paddlesize: {
@@ -139,7 +139,7 @@
             shared.collidableMeshList.push(b.mesh);
         });
 
-        console.log(bricks.brickList[3].getBounding());
+        //console.log(bricks.brickList[3].getBounding());
         bricks.setSignal(shared.signals, shared.scene, shared);
 
         paddle = new Paddles(shared);

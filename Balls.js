@@ -18,7 +18,7 @@ var Balls = function (shared) {
 
     helperMesh.rotation.x = Math.PI / 2;
     helperMesh.position.y = -20;
-    console.log(helperMesh);
+    //console.log(helperMesh);
 
     this.helperGeometry = helperMesh.clone();
 

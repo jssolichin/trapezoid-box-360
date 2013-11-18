@@ -8,13 +8,21 @@ var Paddles = function (shared) {
 
     var geometry = new THREE.CubeGeometry(shared.parameters.paddlesize.width, shared.parameters.paddlesize.height,
         shared.parameters.paddlesize.depth);
+
+    console.log(geometry);
     var material = new THREE.MeshBasicMaterial({wireframe: true});
     var paddle = new THREE.Mesh(geometry, material);
 
-    paddle.position.y = -19;
+    paddle.position.y = -19.3;
+
+    paddle.geometry.vertices.forEach(function (v, idx, arr) {
+        if (v.y == shared.parameters.paddlesize.height / 2) {
+            arr[idx].x = v.x * 0.7;
+            arr[idx].z = v.z * 0.7;
+        }
+    });
 
     this.geometry = paddle.clone();
-    console.log(this.geometry);
 };
 
 Paddles.prototype.updatePos = function (x, y, z) {

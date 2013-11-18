@@ -74,7 +74,7 @@ Bricks.prototype.setSignal = function (signals, scene, shared) {
     var self = this;
    signals.blockHit.add(function(idx) {
         if (self.brickList[idx] != undefined) {
-            console.log(self.brickList[idx]);
+            //console.log(self.brickList[idx]);
 
             var theColor = self.brickList[idx].mesh.material.emissive.clone();
 
@@ -97,7 +97,7 @@ Bricks.prototype.setSignal = function (signals, scene, shared) {
                 newBrick.mesh.position.y = self.brickList[idx].mesh.position.y-5;
                 newBrick.mesh.material = new THREE.MeshPhongMaterial( { color: 0x000000,  emissive: 0x000000, ambient: 0x000000, shading: THREE.SmoothShading, opacity: 0.8, transparent: true } )
                 newBrick.prototype = Bricks.prototype;
-                console.log(newBrick.prototype);
+                //console.log(newBrick.prototype);
                 self.brickList[newBrick.idx] = newBrick;
                 shared.scene.add(newBrick.mesh);
                 shared.collidableMeshList.push(newBrick.mesh);
