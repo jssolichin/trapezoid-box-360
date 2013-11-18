@@ -6,7 +6,7 @@
  */
 (function () {
 
-    var container, bricks, paddle, boundingBox, ball, Signal = signals.Signal;
+    var container, bricks, paddle, boundingBox, ball, Signal = signals.Signal, views;
     var shared = {
         width: window.innerWidth,
         height: window.innerHeight,
@@ -119,6 +119,83 @@
 
         //setup scene and camera
         shared.renderer = new THREE.WebGLRenderer();
+
+        views = [
+            {
+                left: 0,
+                bottom: 0.5,
+                width: 0.5,
+                height: 0.5,
+                background: new THREE.Color().setRGB( 0.2, 0.5, 0.7 ),
+                eye: [ 0, 200, 500 ],
+                up: [ 0, 1, 0 ],
+                fov: 30,
+                updateCamera: function ( camera, scene, mouseX, mouseY ) {
+                    camera.position.x = 100 * Math.cos((mouseX / shared.width + 3) * 0.5);
+                    camera.position.z = 100 * Math.sin((mouseX / shared.width + 3) * 0.5);
+                    camera.lookAt(scene.position);
+                }
+            },
+            {
+                left: 0,
+                bottom: 0,
+                width: 0.5,
+                height: 0.5,
+                background: new THREE.Color().setRGB( 0.5, 0.5, 0.7 ),
+                eye: [ 0, 200, 1800 ],
+                up: [ 0, 1, 0 ],
+                fov: 30,
+                updateCamera: function ( camera, scene, mouseX, mouseY ) {
+                    camera.position.x = 100 * Math.cos((mouseX / shared.width + 3) * 0.5);
+                    camera.position.z = 100 * Math.sin((mouseX / shared.width + 3) * 0.5);
+                    camera.lookAt(scene.position);
+                }
+            },
+            {
+                left: 0.5,
+                bottom: 0,
+                width: 0.5,
+                height: 0.5,
+                background: new THREE.Color().setRGB( 0.7, 0.5, 0.5 ),
+                eye: [ 0, 200, 0 ],
+                up: [ 0, 0, 1 ],
+                fov: 45,
+                updateCamera: function ( camera, scene, mouseX, mouseY ) {
+                    camera.position.x = 100 * Math.cos((mouseX / shared.width + 3) * 0.5);
+                    camera.position.z = 100 * Math.sin((mouseX / shared.width + 3) * 0.5);
+                    camera.lookAt(scene.position);
+                }
+            },
+            {
+                left: 0.5,
+                bottom: 0.5,
+                width: 0.5,
+                height: 0.5,
+                background: new THREE.Color().setRGB( 0.5, 0.7, 0.7 ),
+                eye: [ 200, 200, 0 ],
+                up: [ 0, 1, 0 ],
+                fov: 60,
+                updateCamera: function ( camera, scene, mouseX, mouseY ) {
+                    camera.position.x = 100 * Math.cos((mouseX / shared.width + 3) * 0.5);
+                    camera.position.z = 100 * Math.sin((mouseX / shared.width + 3) * 0.5);
+                    camera.lookAt(scene.position);
+                }
+            }
+        ];
+
+        for (var ii =  0; ii < views.length; ++ii ) {
+
+            var view = views[ii];
+            var camera = new THREE.PerspectiveCamera( view.fov, window.innerWidth / window.innerHeight, 1, 10000 );
+            camera.position.x = view.eye[ 0 ];
+            camera.position.y = view.eye[ 1 ];
+            camera.position.z = view.eye[ 2 ];
+            camera.up.x = view.up[ 0 ];
+            camera.up.y = view.up[ 1 ];
+            camera.up.z = view.up[ 2 ];
+            view.camera = camera;
+        }
+
         shared.camera = new THREE.PerspectiveCamera(45, shared.width / shared.height, 0.1, 1000);
         shared.scene = new THREE.Scene();
         shared.renderer.setClearColor(0x000000);
@@ -192,7 +269,28 @@
             }
         }
 
-        shared.renderer.render(shared.scene, shared.camera);
+        //shared.renderer.render(shared.scene, shared.camera);
+        for ( var ii = 0; ii < views.length; ++ii ) {
+
+            var view = views[ii];
+            shared.camera = view.camera;
+
+            view.updateCamera( shared.camera, shared.scene, shared.mouseX, shared.mouseY );
+
+            var left   = Math.floor( window.innerWidth  * view.left );
+            var bottom = Math.floor( window.innerHeight * view.bottom );
+            var width  = Math.floor( window.innerWidth  * view.width );
+            var height = Math.floor( window.innerHeight * view.height );
+            shared.renderer.setViewport( left, bottom, width, height );
+            shared.renderer.setScissor( left, bottom, width, height );
+            shared.renderer.enableScissorTest ( true );
+            shared.renderer.setClearColor( view.background );
+
+            shared.camera.aspect = width / height;
+            shared.camera.updateProjectionMatrix();
+
+            shared.renderer.render( shared.scene, shared.camera );
+        }
     }
 
     function BoundingBox(shared) {
