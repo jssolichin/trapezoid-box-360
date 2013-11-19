@@ -24,7 +24,7 @@
             bounding: {
                 width: 50,
                 height: 50,
-                depth: 35,
+                depth: 50,
                 x: 0,
                 y: 5,
                 z: 6,
@@ -49,8 +49,8 @@
             },
             brickoffsets: {
                 x: 5,
-                y: 25,
-                z: 1
+                y: 28,
+                z: -14
             },
             paddlesize: {
                 width: 10,
@@ -126,6 +126,8 @@
                 bottom: 2,
                 width: 0.5,
                 height: 0.5,
+                offsetX: 0,
+                offsetY: 0,
                 background: new THREE.Color().setRGB( 0.2, 0.5, 0.7 ),
                 eye: [ 0, 0, -100 ],
                 up: [ 0, -1, 0 ],
@@ -139,6 +141,8 @@
                 bottom: 1,
                 width: 0.5,
                 height: 0.5,
+                offsetX: -30,
+                offsetY: 0,
                 background: new THREE.Color().setRGB( 0.5, 0.5, 0.7 ),
                 eye: [ -100, 0, 0 ],
                 up: [ 0, 0, -1 ],
@@ -152,8 +156,10 @@
                 bottom: 0,
                 width: 0.5,
                 height: 0.5,
+                offsetX: 0,
+                offsetY: -50,
                 background: new THREE.Color().setRGB( 0.7, 0.5, 0.5 ),
-                eye: [ 0, 0, 100 ],
+                eye: [ 0, 0, 110 ],
                 up: [ 0, 1, 0 ],
                 fov: 40,
                 updateCamera: function ( camera, scene, mouseX, mouseY ) {
@@ -165,6 +171,8 @@
                 bottom: 1,
                 width: 0.5,
                 height: 0.5,
+                offsetX: 20,
+                offsetY: 0,
                 background: new THREE.Color().setRGB( 0.5, 0.7, 0.7 ),
                 eye: [ 100, 0, 0 ],
                 up: [ 0, 0, -1 ],
@@ -269,7 +277,7 @@
             var bottom = Math.floor( window.innerHeight / 3 * view.bottom );
             var width  = Math.floor( window.innerHeight / 3 );
             var height = Math.floor( window.innerHeight / 3 );
-            shared.renderer.setViewport( left, bottom, width, height );
+            shared.renderer.setViewport( left+view.offsetX, bottom+22+view.offsetY, width, height );
             shared.renderer.setScissor( left, bottom, width, height );
             shared.renderer.enableScissorTest ( true );
             shared.renderer.setClearColor( view.background );
