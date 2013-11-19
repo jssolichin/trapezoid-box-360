@@ -127,10 +127,10 @@
                 width: 0.5,
                 height: 0.5,
                 offsetX: 0,
-                offsetY: 0,
+                offsetY: -25,
                 background: new THREE.Color().setRGB( 0.2, 0.5, 0.7 ),
                 eye: [ 0, 0, -100 ],
-                up: [ 0, -1, 0 ],
+                up: [ 0, 1, 0 ],
                 fov: 40,
                 updateCamera: function ( camera, scene, mouseX, mouseY ) {
                     camera.lookAt(scene.position);
@@ -141,11 +141,11 @@
                 bottom: 1,
                 width: 0.5,
                 height: 0.5,
-                offsetX: -30,
-                offsetY: 0,
+                offsetX: 20,
+                offsetY: -25,
                 background: new THREE.Color().setRGB( 0.5, 0.5, 0.7 ),
                 eye: [ -100, 0, 0 ],
-                up: [ 0, 0, -1 ],
+                up: [ 0, 0, 1 ],
                 fov: 40,
                 updateCamera: function ( camera, scene, mouseX, mouseY ) {
                     camera.lookAt(scene.position);
@@ -157,10 +157,10 @@
                 width: 0.5,
                 height: 0.5,
                 offsetX: 0,
-                offsetY: -50,
+                offsetY: 25,
                 background: new THREE.Color().setRGB( 0.7, 0.5, 0.5 ),
                 eye: [ 0, 0, 110 ],
-                up: [ 0, 1, 0 ],
+                up: [ 0, -1, 0 ],
                 fov: 40,
                 updateCamera: function ( camera, scene, mouseX, mouseY ) {
                     camera.lookAt(scene.position);
@@ -171,11 +171,11 @@
                 bottom: 1,
                 width: 0.5,
                 height: 0.5,
-                offsetX: 20,
-                offsetY: 0,
+                offsetX: -20,
+                offsetY: -20,
                 background: new THREE.Color().setRGB( 0.5, 0.7, 0.7 ),
                 eye: [ 100, 0, 0 ],
-                up: [ 0, 0, -1 ],
+                up: [ 0, 0, 1 ],
                 fov: 40,
                 updateCamera: function ( camera, scene, mouseX, mouseY ) {
                     camera.lookAt(scene.position);
@@ -277,7 +277,7 @@
             var bottom = Math.floor( window.innerHeight / 3 * view.bottom );
             var width  = Math.floor( window.innerHeight / 3 );
             var height = Math.floor( window.innerHeight / 3 );
-            shared.renderer.setViewport( left+view.offsetX, bottom+22+view.offsetY, width, height );
+            shared.renderer.setViewport( left+view.offsetX, bottom+view.offsetY, width, height );
             shared.renderer.setScissor( left, bottom, width, height );
             shared.renderer.enableScissorTest ( true );
             shared.renderer.setClearColor( view.background );
