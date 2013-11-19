@@ -8,8 +8,8 @@
 
     var container, bricks, paddle, boundingBox, ball, Signal = signals.Signal, views;
     var shared = {
-        width: window.innerWidth,
-        height: window.innerHeight,
+        width: window.innerHeight-5,
+        height: window.innerHeight-5,
         mouseX: 0,
         mouseY: 0,
         pressedKeys: [0, 0, 0, 0],
@@ -122,62 +122,54 @@
 
         views = [
             {
-                left: 0,
-                bottom: 0.5,
+                left: 1,
+                bottom: 2,
                 width: 0.5,
                 height: 0.5,
                 background: new THREE.Color().setRGB( 0.2, 0.5, 0.7 ),
-                eye: [ 0, 200, 500 ],
-                up: [ 0, 1, 0 ],
-                fov: 30,
+                eye: [ 0, 0, -100 ],
+                up: [ 0, -1, 0 ],
+                fov: 40,
                 updateCamera: function ( camera, scene, mouseX, mouseY ) {
-                    camera.position.x = 100 * Math.cos((mouseX / shared.width + 3) * 0.5);
-                    camera.position.z = 100 * Math.sin((mouseX / shared.width + 3) * 0.5);
                     camera.lookAt(scene.position);
                 }
             },
             {
                 left: 0,
-                bottom: 0,
+                bottom: 1,
                 width: 0.5,
                 height: 0.5,
                 background: new THREE.Color().setRGB( 0.5, 0.5, 0.7 ),
-                eye: [ 0, 200, 1800 ],
-                up: [ 0, 1, 0 ],
-                fov: 30,
+                eye: [ -100, 0, 0 ],
+                up: [ 0, 0, -1 ],
+                fov: 40,
                 updateCamera: function ( camera, scene, mouseX, mouseY ) {
-                    camera.position.x = 100 * Math.cos((mouseX / shared.width + 3) * 0.5);
-                    camera.position.z = 100 * Math.sin((mouseX / shared.width + 3) * 0.5);
                     camera.lookAt(scene.position);
                 }
             },
             {
-                left: 0.5,
+                left: 1,
                 bottom: 0,
                 width: 0.5,
                 height: 0.5,
                 background: new THREE.Color().setRGB( 0.7, 0.5, 0.5 ),
-                eye: [ 0, 200, 0 ],
-                up: [ 0, 0, 1 ],
-                fov: 45,
+                eye: [ 0, 0, 100 ],
+                up: [ 0, 1, 0 ],
+                fov: 40,
                 updateCamera: function ( camera, scene, mouseX, mouseY ) {
-                    camera.position.x = 100 * Math.cos((mouseX / shared.width + 3) * 0.5);
-                    camera.position.z = 100 * Math.sin((mouseX / shared.width + 3) * 0.5);
                     camera.lookAt(scene.position);
                 }
             },
             {
-                left: 0.5,
-                bottom: 0.5,
+                left: 2,
+                bottom: 1,
                 width: 0.5,
                 height: 0.5,
                 background: new THREE.Color().setRGB( 0.5, 0.7, 0.7 ),
-                eye: [ 200, 200, 0 ],
-                up: [ 0, 1, 0 ],
-                fov: 60,
+                eye: [ 100, 0, 0 ],
+                up: [ 0, 0, -1 ],
+                fov: 40,
                 updateCamera: function ( camera, scene, mouseX, mouseY ) {
-                    camera.position.x = 100 * Math.cos((mouseX / shared.width + 3) * 0.5);
-                    camera.position.z = 100 * Math.sin((mouseX / shared.width + 3) * 0.5);
                     camera.lookAt(scene.position);
                 }
             }
@@ -186,7 +178,7 @@
         for (var ii =  0; ii < views.length; ++ii ) {
 
             var view = views[ii];
-            var camera = new THREE.PerspectiveCamera( view.fov, window.innerWidth / window.innerHeight, 1, 10000 );
+            var camera = new THREE.PerspectiveCamera( view.fov, window.innerWidth / window.innerHeight, 0.1, 10000 );
             camera.position.x = view.eye[ 0 ];
             camera.position.y = view.eye[ 1 ];
             camera.position.z = view.eye[ 2 ];
@@ -239,10 +231,6 @@
         requestAnimationFrame(anim);
         //shared.camera.position.x = -shared.mouseX * 0.1 + 10;
 
-        shared.camera.position.x = 100 * Math.cos((shared.mouseX / shared.width + 3) * 0.5);
-        shared.camera.position.z = 100 * Math.sin((shared.mouseX / shared.width + 3) * 0.5);
-        shared.camera.lookAt(shared.scene.position);
-
 
         computePaddle(paddle, shared.pressedKeys);
         ball.update(shared.parameters.bounding);
@@ -277,16 +265,16 @@
 
             view.updateCamera( shared.camera, shared.scene, shared.mouseX, shared.mouseY );
 
-            var left   = Math.floor( window.innerWidth  * view.left );
-            var bottom = Math.floor( window.innerHeight * view.bottom );
-            var width  = Math.floor( window.innerWidth  * view.width );
-            var height = Math.floor( window.innerHeight * view.height );
+            var left   = Math.floor( window.innerHeight  /3 * view.left);
+            var bottom = Math.floor( window.innerHeight / 3 * view.bottom );
+            var width  = Math.floor( window.innerHeight / 3 );
+            var height = Math.floor( window.innerHeight / 3 );
             shared.renderer.setViewport( left, bottom, width, height );
             shared.renderer.setScissor( left, bottom, width, height );
             shared.renderer.enableScissorTest ( true );
             shared.renderer.setClearColor( view.background );
 
-            shared.camera.aspect = width / height;
+            shared.camera.aspect =1;
             shared.camera.updateProjectionMatrix();
 
             shared.renderer.render( shared.scene, shared.camera );
