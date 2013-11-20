@@ -22,20 +22,20 @@
                 z: (Math.random() - 0.5)
             },
             bounding: {
-                width: 50,
-                height: 50,
-                depth: 50,
+                width: 60,
+                height: 60,
+                depth: 60,
                 x: 0,
                 y: 5,
                 z: 6,
-                sx: 5,
-                sy: 5,
-                sz: 5
+                sx: 3,
+                sy: 3,
+                sz: 3
             },
             bricksize: {
-                width: 10,
-                height: 5,
-                depth: 10
+                width: 20,
+                height: 10,
+                depth: 20
             },
             brickspacing: {
                 x: 0,
@@ -43,19 +43,19 @@
                 z: 0
             },
             bricklayout: {
-                x: 5,
+                x: 3,
                 y: 1,
-                z: 5
+                z: 3
             },
             brickoffsets: {
-                x: 5,
-                y: 28,
+                x: 10,
+                y: 30,
                 z: -14
             },
             paddlesize: {
-                width: 10,
+                width: 20,
                 height: 2,
-                depth: 5
+                depth: 20
             },
             paddlespeed: 0.6
         },
@@ -120,6 +120,7 @@
         //setup scene and camera
         shared.renderer = new THREE.WebGLRenderer();
 
+        console.log(shared.width, shared.height);
         views = [
             {
                 left: 1,
@@ -127,13 +128,13 @@
                 width: 0.5,
                 height: 0.5,
                 offsetX: 0,
-                offsetY: -25,
+                offsetY: 0,
                 background: new THREE.Color().setRGB( 0.2, 0.5, 0.7 ),
-                eye: [ 0, 0, -100 ],
+                eye: [0, 5, -80 ],
                 up: [ 0, 1, 0 ],
-                fov: 40,
+                fov: 60,
                 updateCamera: function ( camera, scene, mouseX, mouseY ) {
-                    camera.lookAt(scene.position);
+                    camera.lookAt(new THREE.Vector3(0, this.eye[1], 0));
                 }
             },
             {
@@ -141,14 +142,15 @@
                 bottom: 1,
                 width: 0.5,
                 height: 0.5,
-                offsetX: 20,
-                offsetY: -25,
+                offsetX: 0,
+                offsetY: 0,
                 background: new THREE.Color().setRGB( 0.5, 0.5, 0.7 ),
-                eye: [ -100, 0, 0 ],
-                up: [ 0, 0, 1 ],
-                fov: 40,
+                eye: [ 85, 5, 5.7 ],
+                up: [ 0, 0, -1 ],
+                fov: 60,
                 updateCamera: function ( camera, scene, mouseX, mouseY ) {
-                    camera.lookAt(scene.position);
+
+                    camera.lookAt(new THREE.Vector3(0, this.eye[1], this.eye[2]));
                 }
             },
             {
@@ -157,13 +159,13 @@
                 width: 0.5,
                 height: 0.5,
                 offsetX: 0,
-                offsetY: 25,
+                offsetY: 0,
                 background: new THREE.Color().setRGB( 0.7, 0.5, 0.5 ),
-                eye: [ 0, 0, 110 ],
+                eye: [ 0, 5, 90 ],
                 up: [ 0, -1, 0 ],
-                fov: 40,
+                fov: 60,
                 updateCamera: function ( camera, scene, mouseX, mouseY ) {
-                    camera.lookAt(scene.position);
+                    camera.lookAt(new THREE.Vector3(0, this.eye[1], this.eye[2]));
                 }
             },
             {
@@ -171,14 +173,14 @@
                 bottom: 1,
                 width: 0.5,
                 height: 0.5,
-                offsetX: -20,
-                offsetY: -20,
+                offsetX: 0,
+                offsetY: 0,
                 background: new THREE.Color().setRGB( 0.5, 0.7, 0.7 ),
-                eye: [ 100, 0, 0 ],
+                eye: [ 85, 5.3, 6.3 ],
                 up: [ 0, 0, 1 ],
-                fov: 40,
+                fov: 60,
                 updateCamera: function ( camera, scene, mouseX, mouseY ) {
-                    camera.lookAt(scene.position);
+                    camera.lookAt(new THREE.Vector3(0, this.eye[1], this.eye[2]));
                 }
             }
         ];
@@ -186,7 +188,7 @@
         for (var ii =  0; ii < views.length; ++ii ) {
 
             var view = views[ii];
-            var camera = new THREE.PerspectiveCamera( view.fov, window.innerWidth / window.innerHeight, 0.1, 10000 );
+            var camera = new THREE.PerspectiveCamera( view.fov, 1, 0.1, 10000 );
             camera.position.x = view.eye[ 0 ];
             camera.position.y = view.eye[ 1 ];
             camera.position.z = view.eye[ 2 ];

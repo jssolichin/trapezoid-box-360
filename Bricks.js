@@ -88,13 +88,13 @@ Bricks.prototype.setSignal = function (signals, scene, shared) {
                 //var newBrick = self.brickList[idx].clone();
                 var newBrick = {
                     mesh: self.brickList[idx].mesh.clone(),
-                    id: {x: self.brickList[idx].x, y: self.brickList[idx].id.y+10, z: self.brickList[idx].id.z},
+                    id: {x: self.brickList[idx].x, y: self.brickList[idx].id.y*2, z: self.brickList[idx].id.z},
                     depth: self.brickList[idx].depth,
                     height: self.brickList[idx].height,
                     width: self.brickList[idx].width,
                     idx: shared.util.idToIdx({x: self.brickList[idx].x, y: self.brickList[idx].id.y+1, z: self.brickList[idx].id.z})
                 }
-                newBrick.mesh.position.y = self.brickList[idx].mesh.position.y-5;
+                newBrick.mesh.position.y = self.brickList[idx].mesh.position.y-10;
                 newBrick.mesh.material = new THREE.MeshPhongMaterial( { color: 0x000000,  emissive: 0x000000, ambient: 0x000000, shading: THREE.SmoothShading, opacity: 0.8, transparent: true } )
                 newBrick.prototype = Bricks.prototype;
                 //console.log(newBrick.prototype);

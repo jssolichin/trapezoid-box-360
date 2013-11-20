@@ -17,7 +17,7 @@ var Balls = function (shared) {
     var helperMesh = new THREE.Mesh(helperGeometry, helperMaterial);
 
     helperMesh.rotation.x = Math.PI / 2;
-    helperMesh.position.y = -20;
+    helperMesh.position.y = -25;
     //console.log(helperMesh);
 
     this.helperGeometry = helperMesh.clone();

@@ -13,7 +13,7 @@ var Paddles = function (shared) {
     var material = new THREE.MeshBasicMaterial({wireframe: true});
     var paddle = new THREE.Mesh(geometry, material);
 
-    paddle.position.y = -19.3;
+    paddle.position.y = -25;
 
     paddle.geometry.vertices.forEach(function (v, idx, arr) {
         if (v.y == shared.parameters.paddlesize.height / 2) {
