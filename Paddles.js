@@ -9,7 +9,6 @@ var Paddles = function (shared) {
     var geometry = new THREE.CubeGeometry(shared.parameters.paddlesize.width, shared.parameters.paddlesize.height,
         shared.parameters.paddlesize.depth);
 
-    console.log(geometry);
     var material = new THREE.MeshBasicMaterial({wireframe: true});
     var paddle = new THREE.Mesh(geometry, material);
 

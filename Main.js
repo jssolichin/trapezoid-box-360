@@ -67,8 +67,7 @@
                 return rule.apply(this, [].slice.call(arguments, 1));
             },
             idToIdx: function (id) {
-                return (id.z + id.y * shared.parameters.bricklayout.z +
-                    id.x * shared.parameters.bricklayout.y * shared.parameters.bricklayout.x) + 1;
+                return (id.x*100 +id.y*10+id.z);
             },
             brickbounce: (function () {
                 var x, y, z;
@@ -120,7 +119,6 @@
         //setup scene and camera
         shared.renderer = new THREE.WebGLRenderer();
 
-        console.log(shared.width, shared.height);
         views = [
             {
                 left: 1,
@@ -176,8 +174,8 @@
                 offsetX: 0,
                 offsetY: 0,
                 background: new THREE.Color().setRGB( 0.5, 0.7, 0.7 ),
-                eye: [ 85, 5.3, 6.3 ],
-                up: [ 0, 0, 1 ],
+                eye: [ -85, 5.3, 6.3 ],
+                up: [ 0, 0, -1 ],
                 fov: 60,
                 updateCamera: function ( camera, scene, mouseX, mouseY ) {
                     camera.lookAt(new THREE.Vector3(0, this.eye[1], this.eye[2]));
@@ -221,12 +219,12 @@
         //console.log(bricks.brickList[3].getBounding());
         bricks.setSignal(shared.signals, shared.scene, shared);
 
-        paddle = new Paddles(shared);
+        //paddle = new Paddles(shared);
 
         Balls.prototype.bounce = shared.util.maybe(Balls.prototype.bounce);
         ball = new Balls(shared);
 
-        shared.scene.add(paddle.geometry);
+        //shared.scene.add(paddle.geometry);
         shared.scene.add(ball.geometry);
         shared.scene.add(ball.helperGeometry);
 
@@ -239,10 +237,8 @@
 
     function anim() {
         requestAnimationFrame(anim);
-        //shared.camera.position.x = -shared.mouseX * 0.1 + 10;
 
-
-        computePaddle(paddle, shared.pressedKeys);
+        //computePaddle(paddle, shared.pressedKeys);
         ball.update(shared.parameters.bounding);
         var origin = ball.geometry.position.clone();
         for (var vtxIdx = 0; vtxIdx < ball.geometry.geometry.vertices.length ; vtxIdx++) {
@@ -252,19 +248,20 @@
 
             var ray = new THREE.Raycaster(origin, direction.clone().normalize());
             var results = ray.intersectObjects(shared.collidableMeshList);
-            var paddleHit = ray.intersectObjects([paddle.geometry]);
+            //var paddleHit = ray.intersectObjects([paddle.geometry]);
             if (results.length > 0 && results[0].distance < direction.length()) {
                 ball.bounce(direction.clone().normalize().multiplyScalar(0.9));
                 var hit = results[0].object.idx;
+                console.log(hit);
                 var temp = shared.collidableMeshList[hit];
                 shared.signals.blockHit.dispatch(hit);
                 delete shared.collidableMeshList[hit];
-                setTimeout(function(){shared.collidableMeshList[hit] = temp}, 1000)
+                setTimeout(function(){shared.collidableMeshList[hit] = temp; }, 40)
             }
-            if (paddleHit.length > 0 && paddleHit[0].distance < direction.length()) {
+            /*if (paddleHit.length > 0 && paddleHit[0].distance < direction.length()) {
                 ball.bounce(direction.clone ().normalize().multiplyScalar(0.9));
 
-            }
+            }*/
         }
 
         //shared.renderer.render(shared.scene, shared.camera);
@@ -297,7 +294,7 @@
         this.depth = shared.parameters.bounding.depth;
         var geometry = new THREE.CubeGeometry(this.width, this.height, this.depth,
             shared.parameters.bounding.sx, shared.parameters.bounding.sy, shared.parameters.bounding.sz);
-        var material = new THREE.MeshBasicMaterial({wireframe: true});
+        var material = new THREE.MeshBasicMaterial({wireframe: true, opacity: 0, transparency: true});
         var boundingBox = new THREE.Mesh(geometry, material);
         boundingBox.position = new THREE.Vector3(shared.parameters.bounding.x, shared.parameters.bounding.y,
             shared.parameters.bounding.z);

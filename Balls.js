@@ -17,12 +17,10 @@ var Balls = function (shared) {
     var helperMesh = new THREE.Mesh(helperGeometry, helperMaterial);
 
     helperMesh.rotation.x = Math.PI / 2;
-    helperMesh.position.y = -25;
+    helperMesh.position.y = -23;
     //console.log(helperMesh);
 
     this.helperGeometry = helperMesh.clone();
-
-
 
     this.velocity = new THREE.Vector3(p.ballspeed.x, p.ballspeed.y,
         p.ballspeed.z);
@@ -60,5 +58,4 @@ Balls.prototype.bounce = function (direction) {
     this.velocity.y = direction.y * -1;
     this.velocity.x = direction.x * -1;
     this.velocity.z = direction.z * -1;
-
 };
