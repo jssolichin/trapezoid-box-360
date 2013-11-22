@@ -5,7 +5,7 @@ var Balls = function (shared) {
     var p = shared.parameters;
     this.radius = p.ballsize;
     var geometry = new THREE.SphereGeometry(this.radius);
-    var material = new THREE.MeshBasicMaterial({wireframe: true});
+    var material = new THREE.MeshBasicMaterial({color: 0x000000});
     var mesh = new THREE.Mesh(geometry, material);
     this.geometry = mesh.clone();
 

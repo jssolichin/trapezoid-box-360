@@ -72,19 +72,13 @@ Bricks.prototype.update = function(fn) {
 
 Bricks.prototype.setSignal = function (signals, scene, shared) {
     var self = this;
-   signals.blockHit.add(function(idx) {
+   signals.blockHit.add(function(idx, color) {
         if (self.brickList[idx] != undefined) {
-
+            console.log(color);
             //console.log(self.brickList[idx]);
             var theColor = self.brickList[idx].mesh.material.emissive.clone();
 
-            if(theColor.r == 0)
-                theColor.r =1;
-            else if(theColor.g == 0)
-                theColor.g =1;
-            else if(theColor.b == 0)
-                theColor.b =1;
-            else { 
+            if(theColor.getHex() == 0xffffff) { 
             /*
                 //var newBrick = self.brickList[idx].clone();
                 var newBrick = {
@@ -104,6 +98,7 @@ Bricks.prototype.setSignal = function (signals, scene, shared) {
                 shared.collidableMeshList.push(newBrick.mesh);
                 */
             }
+            else theColor.add(color);
 
             var newMaterial =  new THREE.MeshPhongMaterial( { color: 0x000000,  emissive: theColor, ambient: 0x000000, shading: THREE.SmoothShading, opacity: 1, transparent: true, needsUpdate:true } );
             

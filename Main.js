@@ -271,14 +271,13 @@
                     ball.bounce(direction.clone().normalize().multiplyScalar(0.9));
                     var hit = results[0].object.idx;
                     var temp = shared.collidableMeshList[hit];
-                    shared.signals.blockHit.dispatch(hit);
+                    shared.signals.blockHit.dispatch(hit, ball.geometry.material.color);
                     delete shared.collidableMeshList[hit];
                     setTimeout(function(){shared.collidableMeshList[hit] = temp; }, 40)
                 }
                
             }
             if (paddleHit.length > 0 && paddleHit[0].distance < direction.length()) {
-                console.log(paddleHit[0].object.material.color);
                 ball.geometry.material.color = paddleHit[0].object.material.color;
                 ball.bounce(direction.clone ().normalize().multiplyScalar(0.9));
             }
