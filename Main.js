@@ -278,6 +278,8 @@
                
             }
             if (paddleHit.length > 0 && paddleHit[0].distance < direction.length()) {
+                console.log(paddleHit[0].object.material.color);
+                ball.geometry.material.color = paddleHit[0].object.material.color;
                 ball.bounce(direction.clone ().normalize().multiplyScalar(0.9));
             }
         }
