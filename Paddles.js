@@ -4,12 +4,12 @@
  * Date: 10/18/13
  * Time: 2:06 PM
  */
-var Paddles = function (shared) {
+var Paddles = function (shared, color) {
 
     var geometry = new THREE.CubeGeometry(shared.parameters.paddlesize.width, shared.parameters.paddlesize.height,
         shared.parameters.paddlesize.depth);
 
-    var material = new THREE.MeshBasicMaterial({wireframe: true});
+    var material = new THREE.MeshBasicMaterial({color: color});
     var paddle = new THREE.Mesh(geometry, material);
 
     paddle.position.y = -20;

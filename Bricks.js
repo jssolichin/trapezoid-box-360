@@ -20,7 +20,7 @@ var Bricks = function (shared) {
     //function to generate individual brick
     function generateBrick(width, height, depth, material, separation) {
         var geometry = new THREE.CubeGeometry(width, height, depth);
-        var material = new THREE.MeshPhongMaterial( { color: 0x000000,  emissive: 0x000000, ambient: 0x000000, shading: THREE.SmoothShading, opacity: 0.8, transparent: true } ) 
+        var material = new THREE.MeshPhongMaterial( { color: 0x000000,  emissive: 0x000000, ambient: 0x000000, shading: THREE.SmoothShading, opacity: 1, transparent: true } ) 
         var brick = new THREE.Mesh(geometry, material);
         return function (id, idx) {
             this.mesh = brick;
@@ -96,7 +96,7 @@ Bricks.prototype.setSignal = function (signals, scene, shared) {
                     idx: shared.util.idToIdx( {x: self.brickList[idx].id.x, y: self.brickList[idx].id.y*2, z: self.brickList[idx].id.z})
                 }
                 newBrick.mesh.position.y = self.brickList[idx].mesh.position.y-10;
-                newBrick.mesh.material = new THREE.MeshPhongMaterial( { color: 0x000000,  emissive: 0x000000, ambient: 0x000000, shading: THREE.SmoothShading, opacity: 0.8, transparent: true } )
+                newBrick.mesh.material = new THREE.MeshPhongMaterial( { color: 0x000000,  emissive: 0x000000, ambient: 0x000000, shading: THREE.SmoothShading, opacity: 1, transparent: true } )
                 newBrick.mesh.idx = newBrick.idx;
                 newBrick.prototype = Bricks.prototype;
                 self.brickList[newBrick.idx] = newBrick;
@@ -105,7 +105,7 @@ Bricks.prototype.setSignal = function (signals, scene, shared) {
                 */
             }
 
-            var newMaterial =  new THREE.MeshPhongMaterial( { color: 0x000000,  emissive: theColor, ambient: 0x000000, shading: THREE.SmoothShading, opacity: 0.8, transparent: true, needsUpdate:true } );
+            var newMaterial =  new THREE.MeshPhongMaterial( { color: 0x000000,  emissive: theColor, ambient: 0x000000, shading: THREE.SmoothShading, opacity: 1, transparent: true, needsUpdate:true } );
             
             self.brickList[idx].mesh.material = newMaterial;
 

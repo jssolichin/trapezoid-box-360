@@ -13,6 +13,7 @@
         mouseX: 0,
         mouseY: 0,
         pressedKeys: [0, 0, 0, 0],
+        pressedKeys2: [0, 0, 0, 0],
         collidableMeshList: [],
         parameters: {
             ballsize: 2,
@@ -224,12 +225,14 @@
         //console.log(bricks.brickList[3].getBounding());
         bricks.setSignal(shared.signals, shared.scene, shared);
 
-        paddle = new Paddles(shared);
+        paddle = new Paddles(shared, 0x00ff00);
+        paddle2 = new Paddles(shared, 0xff0000);
 
         Balls.prototype.bounce = shared.util.maybe(Balls.prototype.bounce);
         ball = new Balls(shared);
 
         shared.scene.add(paddle.geometry);
+        shared.scene.add(paddle2.geometry);
         shared.scene.add(ball.geometry);
         shared.scene.add(ball.helperGeometry);
 
@@ -244,6 +247,7 @@
         requestAnimationFrame(anim);
 
         computePaddle(paddle, shared.pressedKeys);
+        computePaddle(paddle2, shared.pressedKeys2);
         ball.update(shared.parameters.bounding);
         var origin = ball.geometry.position.clone();
         for (var vtxIdx = 0; vtxIdx < ball.geometry.geometry.vertices.length ; vtxIdx++) {
@@ -253,7 +257,7 @@
 
             var ray = new THREE.Raycaster(origin, direction.clone().normalize());
             var results = ray.intersectObjects(shared.collidableMeshList);
-            var paddleHit = ray.intersectObjects([paddle.geometry]);
+            var paddleHit = ray.intersectObjects([paddle.geometry,paddle2.geometry]);
             if (results.length > 0 && results[0].distance < direction.length()) {
                 if(results[0].object.name == "floor"){
                     shared.scene.remove(ball.geometry);
@@ -345,6 +349,7 @@
 
     function handleKeyPresses(speed) {
         return function (event) {
+            console.log(String.fromCharCode(event.keyCode));
             var key = String.fromCharCode(event.keyCode);
             if (key == 'W') {
                 shared.pressedKeys[0] = speed;
@@ -362,6 +367,24 @@
                 shared.pressedKeys[3] = speed;
                 shared.pressedKeys[1] = 0;
             }
+//
+            if (key == '&') {
+                shared.pressedKeys2[0] = speed;
+                shared.pressedKeys2[2] = 0;
+            }
+            if (key == '%') {
+                shared.pressedKeys2[1] = speed;
+                shared.pressedKeys2[3] = 0;
+            }
+            if (key == '(') {
+                shared.pressedKeys2[2] = speed;
+                shared.pressedKeys2[0] = 0;
+            }
+            if (key == '\'') {
+                shared.pressedKeys2[3] = speed;
+                shared.pressedKeys2[1] = 0;
+            }
+            
 
             if (key == 'T') {
                 shared.signals.blockHit.dispatch(2);
