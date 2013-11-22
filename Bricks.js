@@ -84,7 +84,8 @@ Bricks.prototype.setSignal = function (signals, scene, shared) {
                 theColor.g =1;
             else if(theColor.b == 0)
                 theColor.b =1;
-            else {
+            else { 
+            /*
                 //var newBrick = self.brickList[idx].clone();
                 var newBrick = {
                     mesh: self.brickList[idx].mesh.clone(),
@@ -101,6 +102,7 @@ Bricks.prototype.setSignal = function (signals, scene, shared) {
                 self.brickList[newBrick.idx] = newBrick;
                 shared.scene.add(newBrick.mesh);
                 shared.collidableMeshList.push(newBrick.mesh);
+                */
             }
 
             var newMaterial =  new THREE.MeshPhongMaterial( { color: 0x000000,  emissive: theColor, ambient: 0x000000, shading: THREE.SmoothShading, opacity: 0.8, transparent: true, needsUpdate:true } );

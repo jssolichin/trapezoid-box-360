@@ -208,6 +208,10 @@
         boundingBox = new BoundingBox(shared);
 
         shared.scene.add(boundingBox.geometry);
+        shared.scene.add(boundingBox.floorGeometry);
+
+        shared.collidableMeshList.push(boundingBox.floorGeometry);
+
 
         bricks = new Bricks(shared);
 
@@ -216,15 +220,16 @@
             shared.collidableMeshList.push(b.mesh);
         });
 
+
         //console.log(bricks.brickList[3].getBounding());
         bricks.setSignal(shared.signals, shared.scene, shared);
 
-        //paddle = new Paddles(shared);
+        paddle = new Paddles(shared);
 
         Balls.prototype.bounce = shared.util.maybe(Balls.prototype.bounce);
         ball = new Balls(shared);
 
-        //shared.scene.add(paddle.geometry);
+        shared.scene.add(paddle.geometry);
         shared.scene.add(ball.geometry);
         shared.scene.add(ball.helperGeometry);
 
@@ -238,7 +243,7 @@
     function anim() {
         requestAnimationFrame(anim);
 
-        //computePaddle(paddle, shared.pressedKeys);
+        computePaddle(paddle, shared.pressedKeys);
         ball.update(shared.parameters.bounding);
         var origin = ball.geometry.position.clone();
         for (var vtxIdx = 0; vtxIdx < ball.geometry.geometry.vertices.length ; vtxIdx++) {
@@ -248,20 +253,29 @@
 
             var ray = new THREE.Raycaster(origin, direction.clone().normalize());
             var results = ray.intersectObjects(shared.collidableMeshList);
-            //var paddleHit = ray.intersectObjects([paddle.geometry]);
+            var paddleHit = ray.intersectObjects([paddle.geometry]);
             if (results.length > 0 && results[0].distance < direction.length()) {
-                ball.bounce(direction.clone().normalize().multiplyScalar(0.9));
-                var hit = results[0].object.idx;
-                console.log(hit);
-                var temp = shared.collidableMeshList[hit];
-                shared.signals.blockHit.dispatch(hit);
-                delete shared.collidableMeshList[hit];
-                setTimeout(function(){shared.collidableMeshList[hit] = temp; }, 40)
+                if(results[0].object.name == "floor"){
+                    shared.scene.remove(ball.geometry);
+                    setTimeout(function(){
+                        var p = shared.parameters;
+                        ball.geometry.position = new THREE.Vector3(0,0,0);
+                        shared.scene.add(ball.geometry); 
+                    }, 500)
+                }
+                else{
+                    ball.bounce(direction.clone().normalize().multiplyScalar(0.9));
+                    var hit = results[0].object.idx;
+                    var temp = shared.collidableMeshList[hit];
+                    shared.signals.blockHit.dispatch(hit);
+                    delete shared.collidableMeshList[hit];
+                    setTimeout(function(){shared.collidableMeshList[hit] = temp; }, 40)
+                }
+               
             }
-            /*if (paddleHit.length > 0 && paddleHit[0].distance < direction.length()) {
+            if (paddleHit.length > 0 && paddleHit[0].distance < direction.length()) {
                 ball.bounce(direction.clone ().normalize().multiplyScalar(0.9));
-
-            }*/
+            }
         }
 
         //shared.renderer.render(shared.scene, shared.camera);
@@ -299,6 +313,19 @@
         boundingBox.position = new THREE.Vector3(shared.parameters.bounding.x, shared.parameters.bounding.y,
             shared.parameters.bounding.z);
         this.geometry = boundingBox.clone();
+
+        var floorGeometry = new THREE.PlaneGeometry(shared.parameters.bounding.width, shared.parameters.bounding.height);
+
+        var floorMaterial = new THREE.MeshBasicMaterial({wireframe: true, color: 0x13bee9});
+
+        var floorMesh = new THREE.Mesh(floorGeometry, floorMaterial);
+
+        floorMesh.rotation.x = Math.PI / 2;
+        floorMesh.position.y = -22.5;
+        floorMesh.position.z = 5;
+
+        this.floorGeometry = floorMesh.clone();
+        this.floorGeometry.name = "floor";
 
     }
 
