@@ -1,14 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Yholo!</title>
+    <title>TRAPEZOID BOX 360 {By Kevin Lin X Alex Lu X Jonathan Solichin}</title>
+    <link href='http://fonts.googleapis.com/css?family=Share+Tech+Mono' rel='stylesheet' type='text/css'>
+
+    <style>
+		body {margin: 0px; 
+			width: 100%;
+  			 text-align:center; background: #000;}
+
+  		#killScreens{
+  			font-family: 'Share Tech Mono', sans-serif;
+  		}
+  		.rainbow {
+  			background: -webkit-gradient(linear,  left top,  left bottom, 
+	        color-stop(0%, rgba(255, 0, 0, 1)), 
+	        color-stop(15%, rgba(255, 255, 0, 1)),
+	        color-stop(30%, rgba(0, 255, 0, 1)),
+	        color-stop(50%, rgba(0, 255, 255, 1)),
+	        color-stop(65%, rgba(0, 0, 255, 1)),
+	        color-stop(80%, rgba(255, 0, 255, 1)),
+	        color-stop(100%, rgba(255, 0, 0, 1)));
+  		}
+  		#logo {
+  			background: url(logo.svg);-webkit-background-size: cover;
+  			width: 10%;
+  			height: 10%;
+  			position: absolute;
+  			top: 0px;
+  			left:0px;
+  		}
+    </style>
+
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 </head>
 <body>
-
+<div id="logo"></div>
+<div id="killScreens">
+	<div id="screen1" class="eachKill">
+	<div class="rainbow"></div>
+	<div class="textLocation"></div>
+	</div>
+	<div id="screen2" class="eachKill">
+	<div class="rainbow"></div>
+	<div class="textLocation"></div>
+	</div>
+	<div id="screen3" class="eachKill">
+	<div class="rainbow"></div>
+	<div class="textLocation"></div>
+	</div>
+	<div id="screen4" class="eachKill">
+	<div class="rainbow"></div>
+	<div class="textLocation"></div>
+	</div>
+</div>
 </body>
 <script type="text/javascript" src="lib/Detector.js"></script>
 <script type="text/javascript" src="lib/Three.js"></script>
 <script type="text/javascript" src="lib/signals.min.js"></script>
+<script type="text/javascript" src="lib/stats.min.js"></script>
+<script type="text/javascript" src="stats.js"></script>
 <script type="text/javascript" src="Paddles.js"></script>
 <script type="text/javascript" src="Bricks.js"></script>
 <script type="text/javascript" src="Balls.js"></script>

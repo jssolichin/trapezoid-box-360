@@ -4,16 +4,17 @@
  * Date: 10/18/13
  * Time: 2:06 PM
  */
-var Paddles = function (shared) {
+var Paddles = function (shared, color, pos) {
 
     var geometry = new THREE.CubeGeometry(shared.parameters.paddlesize.width, shared.parameters.paddlesize.height,
         shared.parameters.paddlesize.depth);
 
-    console.log(geometry);
-    var material = new THREE.MeshBasicMaterial({wireframe: true});
+    var material = new THREE.MeshBasicMaterial({color: color});
     var paddle = new THREE.Mesh(geometry, material);
 
-    paddle.position.y = -19.3;
+    paddle.position.x = pos[0];
+    paddle.position.y = -22;
+    paddle.position.z = pos[1];
 
     paddle.geometry.vertices.forEach(function (v, idx, arr) {
         if (v.y == shared.parameters.paddlesize.height / 2) {
