@@ -22,11 +22,20 @@
 	        color-stop(80%, rgba(255, 0, 255, 1)),
 	        color-stop(100%, rgba(255, 0, 0, 1)));
   		}
+  		#logo {
+  			background: url(logo.svg);-webkit-background-size: cover;
+  			width: 10%;
+  			height: 10%;
+  			position: absolute;
+  			top: 0px;
+  			left:0px;
+  		}
     </style>
 
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 </head>
 <body>
+<div id="logo"></div>
 <div id="killScreens">
 	<div id="screen1" class="eachKill">
 	<div class="rainbow"></div>

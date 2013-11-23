@@ -42,14 +42,14 @@
                 sz: 1
             },
             bricksize: {
-                /*
+                
                 width: 20,
                 height: 10,
                 depth: 20
-                */
+                /*
                 width: 60,
                 height: 10,
-                depth: 60
+                depth: 60*/
             },
             brickspacing: {
                 x: 0,
@@ -57,24 +57,24 @@
                 z: 0
             },
             bricklayout: {
-                /*
+                
                 x: 3,
                 y: 1,
                 z: 3
-                */
+                /*
                  x: 1,
                 y: 1,
-                z: 1
+                z: 1*/
             },
             brickoffsets: {
-                /*
+               
                 x: 10,
                 y: 30,
                 z: -14
-                */
+                 /*
                 x:30,
                 y:30,
-                z:5
+                z:5*/
             },
             paddlesize: {
                 width: 20,
@@ -338,6 +338,11 @@
                 })
         }
 
+        d3.select("#logo")
+            .style('width', Math.floor( window.innerHeight  /3)+"px" )
+            .style('height', Math.floor( window.innerHeight  /3) +"px")
+            .style('top',  Math.floor( window.innerHeight  /3)*1 - (window.innerHeight/3*.03) +"px")
+            .style('left', marginFromLeftEdge+ Math.floor( window.innerHeight  /3)*1 +"px")
 
     }
 
