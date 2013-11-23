@@ -6,8 +6,11 @@
  */
 (function () {
 
+
     var container, bricks, paddle, boundingBox, ball, Signal = signals.Signal, views;
     var shared = {
+        score: 0,
+        numOfBricksDone: 0,
         numOfBalls: 3,
         theBalls: [],
         width: window.innerHeight-5,
@@ -38,14 +41,14 @@
                 sz: 1
             },
             bricksize: {
-                
+                /*
                 width: 20,
                 height: 10,
                 depth: 20
-                /*
+                */
                 width: 60,
                 height: 10,
-                depth: 60*/
+                depth: 60
             },
             brickspacing: {
                 x: 0,
@@ -53,24 +56,24 @@
                 z: 0
             },
             bricklayout: {
-                
+                /*
                 x: 3,
                 y: 1,
                 z: 3
-                /*
+                */
                  x: 1,
                 y: 1,
-                z: 1*/
+                z: 1
             },
             brickoffsets: {
-                
+                /*
                 x: 10,
                 y: 30,
                 z: -14
-                /*
+                */
                 x:30,
                 y:30,
-                z:5*/
+                z:5
             },
             paddlesize: {
                 width: 20,
@@ -81,6 +84,28 @@
         },
         signals: {
             blockHit: new Signal()
+        },
+        killScreen: function(){
+            console.log('killscreen', shared.score);
+
+            d3.selectAll("#killScreens .eachKill")
+                .style('background', '#ccc')
+                .style('color', '#000')
+
+            d3.selectAll("#killScreens .eachKill .textLocation")
+                .style('font-size', '3em')
+                .style('line-height', '4em')
+                .style('z-index', '4')
+                .style('position', 'relative')
+                    
+            d3.selectAll("#killScreens .eachKill .rainbow")
+                .style('height', shared.score*100+"%")
+                .style('width', '100%')
+                .style('bottom', '0px')
+                .style('z-index', '2')
+                .style('position','absolute')
+
+            setTimeout(function(){document.location.reload(true)}, 5000)
         },
         util: {
             combine: function (rule) {
@@ -250,7 +275,7 @@
         //console.log(bricks.brickList[3].getBounding());
         bricks.setSignal(shared.signals, shared.scene, shared);
 
-        var black = new THREE.Color(0x444444);
+        var black = new THREE.Color("rgb(124,124,124)");
         var red = new THREE.Color("rgb(255,0,0)");
         paddle = new Paddles(shared, 0x00ff00, [30,30]);
         paddle2 = new Paddles(shared, red, [30,-30]);
@@ -277,6 +302,36 @@
         window.addEventListener('click', onClick, false);
         window.addEventListener('keydown', handleKeyPresses(shared.parameters.paddlespeed), false);
         window.addEventListener('keyup', handleKeyPresses(0), false);
+
+        var marginFromLeftEdge = window.innerWidth/2-window.innerHeight/2;
+
+        d3.selectAll("#killScreens div")
+        //    .style('display', 'none')
+
+        for ( var ii = 0; ii < views.length; ++ii ) {
+
+            var view = views[ii];
+
+            var left   = Math.floor( window.innerHeight  /3 * view.left);
+            var bottom = Math.floor( window.innerHeight / 3 * view.bottom );
+            var width  = Math.floor( window.innerHeight / 3 );
+            var height = Math.floor( window.innerHeight / 3 );
+
+            d3.selectAll("#killScreens .eachKill")
+                .style("width",width+"px")
+                .style("height", height+"px")
+                .style("color", "#eee")
+                .style("position", "absolute")
+                
+
+            d3.selectAll("#screen"+(ii+1))
+                .style('top', window.innerHeight-bottom-(window.innerHeight/3+4)+"px")
+                .style('left', marginFromLeftEdge+left+"px")
+                .style('-webkit-transform', function(){
+                    return "rotate("+(ii*-1)*90+"deg)"
+                })
+        }
+
 
     }
 
@@ -351,6 +406,34 @@
 
             shared.renderer.render( shared.scene, shared.camera );
         }
+
+        shared.score = 0;
+        var divideBy = 0;
+        bricks.brickList.forEach(function(d){
+            if(d.mesh !=null && d.mesh.material != null && d.mesh.material.opacity !=null){
+                divideBy++;
+                shared.score += d.mesh.material.opacity
+            }
+        })
+        
+        if(!isNaN(shared.score/ divideBy)){
+            shared.score = shared.score/divideBy;
+
+            if(shared.score <= 0){
+                shared.killScreen();
+            }
+            else {
+                d3.selectAll('#killScreens .textLocation')
+                    .html(parseInt(shared.score*100)+"%")
+
+                d3.selectAll('#killScreens #screen1 .textLocation')
+                    .html((100-parseInt(shared.score*100))+"%")
+            }
+            
+        }
+
+        
+
          stats.end();
     }
 

@@ -76,36 +76,46 @@ Bricks.prototype.setSignal = function (signals, scene, shared) {
         if (self.brickList[idx] != undefined) {
             var color = ballMaterial.color;
             var theColor = self.brickList[idx].mesh.material.emissive ? self.brickList[idx].mesh.material.emissive.clone() : null;
+            var theOpacity = self.brickList[idx].mesh.material.opacity; 
 
             if(ballMaterial.wireframe){
-
+                
             }
             else {
+                var totalBricks = shared.parameters.bricklayout.x *shared.parameters.bricklayout.z
 
-                console.log(theColor.getHSL().l);
-                if(theColor.r >0 &&theColor.g>0 && theColor.b >0){
-                    //has been hit with all 3 colors then it can no longer change
-                }
-                else if(color.getHexString() ==444444 ){
+                
+                if(color.getHex() == 0x7C7C7C ){
                     if(theColor.getHexString() ==000000) //if is black hit black, dont reduce anymore
                         theColor.setHex(000000)
                     else
-                        theColor.offsetHSL(0,0,-.25); //else reduce color by 25%
+                        theOpacity -=.3333; //else reduce color by 25%
                 }
                 else {
                     theColor.add(color);
                     theColor.setHex(theColor.getHex()) //so we don't keep adding the color past the visible spectrum
                 }
-                    console.log(theColor);
 
-                var newMaterial =  new THREE.MeshPhongMaterial( { color: 0x000000,  emissive: theColor, ambient: 0x000000, shading: THREE.SmoothShading, needsUpdate:true } );
+                if(theColor.r >0 &&theColor.g>0 && theColor.b >0 || theOpacity <=0){
+                    //has been hit with all 3 colors then it can no longer change
+                    if(self.brickList[idx].marked!=true){
+                        self.brickList[idx].marked = true;
+                        shared.numOfBricksDone++;
+                    }
+                    
+                    if(shared.numOfBricksDone >= totalBricks){
+                        shared.killScreen();
+                    }
+                }
+
+                var newMaterial =  new THREE.MeshPhongMaterial( { color: 0x000000,  emissive: theColor, ambient: 0x000000, shading: THREE.SmoothShading, opacity: theOpacity, transparent: true, needsUpdate:true } );
                 
                 self.brickList[idx].mesh.material = newMaterial;
 
                 
                 var temp = self.brickList[idx];
                 delete self.brickList[idx];
-                setTimeout(function(){self.brickList[idx] = temp}, 1000)
+                setTimeout(function(){self.brickList[idx] = temp}, 100)
 
             }
 
