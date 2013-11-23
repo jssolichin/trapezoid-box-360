@@ -13,7 +13,7 @@ var Paddles = function (shared, color, pos) {
     var paddle = new THREE.Mesh(geometry, material);
 
     paddle.position.x = pos[0];
-    paddle.position.y = -20;
+    paddle.position.y = -22;
     paddle.position.z = pos[1];
 
     paddle.geometry.vertices.forEach(function (v, idx, arr) {

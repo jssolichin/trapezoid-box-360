@@ -72,52 +72,41 @@ Bricks.prototype.update = function(fn) {
 
 Bricks.prototype.setSignal = function (signals, scene, shared) {
     var self = this;
-   signals.blockHit.add(function(idx, color) {
+   signals.blockHit.add(function(idx, ballMaterial) {
         if (self.brickList[idx] != undefined) {
-            
-            var theColor;
-            if(self.brickList[idx].mesh.material.emissive == "undefined"){
-                theColor = self.brickList[idx].mesh.material.emissive.clone()
-            }
-            else 
-                theColor = new THREE.Color(0x000000);
+            var color = ballMaterial.color;
+            var theColor = self.brickList[idx].mesh.material.emissive ? self.brickList[idx].mesh.material.emissive.clone() : null;
 
-            if(theColor.getHex() == 0x000000 && color.getHex() == 0x000000 ) { 
-                delete shared.collidableMeshList[idx];
-                var newMaterial =  new THREE.MeshBasicMaterial( { wireframe: true, color: 0xffffff} );
-                self.brickList[idx].mesh.material = newMaterial;
-                
+            if(ballMaterial.wireframe){
+
             }
             else {
 
-                if(theColor.getHex() == 0xffffff) { 
-                /*
-                    //var newBrick = self.brickList[idx].clone();
-                    var newBrick = {
-                        mesh: self.brickList[idx].mesh.clone(),
-                        id: {x: self.brickList[idx].id.x, y: self.brickList[idx].id.y+1, z: self.brickList[idx].id.z},
-                        depth: self.brickList[idx].depth,
-                        height: self.brickList[idx].height,
-                        width: self.brickList[idx].width,
-                        idx: shared.util.idToIdx( {x: self.brickList[idx].id.x, y: self.brickList[idx].id.y*2, z: self.brickList[idx].id.z})
-                    }
-                    newBrick.mesh.position.y = self.brickList[idx].mesh.position.y-10;
-                    newBrick.mesh.material = new THREE.MeshPhongMaterial( { color: 0x000000,  emissive: 0x000000, ambient: 0x000000, shading: THREE.SmoothShading, opacity: 1, transparent: true } )
-                    newBrick.mesh.idx = newBrick.idx;
-                    newBrick.prototype = Bricks.prototype;
-                    self.brickList[newBrick.idx] = newBrick;
-                    shared.scene.add(newBrick.mesh);
-                    shared.collidableMeshList.push(newBrick.mesh);
-                    */
+                console.log(theColor.getHSL().l);
+                if(theColor.r >0 &&theColor.g>0 && theColor.b >0){
+                    //has been hit with all 3 colors then it can no longer change
                 }
-                else if (color.getHex() == 0x000000){
-                    theColor = new THREE.Color(0x000000);
+                else if(color.getHexString() ==141414 ){
+                    if(theColor.getHexString() ==000000) //if is black hit black, dont reduce anymore
+                        theColor.setHex(000000)
+                    else
+                        theColor.offsetHSL(0,0,-.25); //else reduce color by 25%
                 }
-                else theColor.add(color);
+                else {
+                    theColor.add(color);
+                    theColor.setHex(theColor.getHex()) //so we don't keep adding the color past the visible spectrum
+                }
+                    console.log(theColor);
 
-                var newMaterial =  new THREE.MeshPhongMaterial( { color: 0x000000,  emissive: theColor, ambient: 0x000000, shading: THREE.SmoothShading, opacity: 1, transparent: true, needsUpdate:true } );
+                var newMaterial =  new THREE.MeshPhongMaterial( { color: 0x000000,  emissive: theColor, ambient: 0x000000, shading: THREE.SmoothShading, needsUpdate:true } );
                 
                 self.brickList[idx].mesh.material = newMaterial;
+
+                
+                var temp = self.brickList[idx];
+                delete self.brickList[idx];
+                setTimeout(function(){self.brickList[idx] = temp}, 1000)
+
             }
 
         }

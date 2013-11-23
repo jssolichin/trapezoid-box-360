@@ -31,14 +31,19 @@
                 x: 0,
                 y: 5,
                 z: 6,
-                sx: 3,
-                sy: 3,
-                sz: 3
+                sx: 1,
+                sy: 1,
+                sz: 1
             },
             bricksize: {
+                /*
                 width: 20,
                 height: 10,
                 depth: 20
+                */
+                width: 60,
+                height: 10,
+                depth: 60
             },
             brickspacing: {
                 x: 0,
@@ -46,14 +51,24 @@
                 z: 0
             },
             bricklayout: {
+                /*
                 x: 3,
                 y: 1,
                 z: 3
+                */
+                 x: 1,
+                y: 1,
+                z: 1
             },
             brickoffsets: {
+                /*
                 x: 10,
                 y: 30,
                 z: -14
+                */
+                x:30,
+                y:30,
+                z:5
             },
             paddlesize: {
                 width: 20,
@@ -212,6 +227,8 @@
 
         shared.scene.add(boundingBox.geometry);
         shared.scene.add(boundingBox.floorGeometry);
+        shared.scene.add(boundingBox.bottomGeometry);
+        shared.scene.add(boundingBox.ceilingGeometry);
 
         shared.collidableMeshList.push(boundingBox.floorGeometry);
 
@@ -227,10 +244,12 @@
         //console.log(bricks.brickList[3].getBounding());
         bricks.setSignal(shared.signals, shared.scene, shared);
 
+        var black = new THREE.Color("rgb(20,20,20)");
+        var red = new THREE.Color("rgb(255,0,0)");
         paddle = new Paddles(shared, 0x00ff00, [30,30]);
-        paddle2 = new Paddles(shared, 0xff0000, [30,-30]);
+        paddle2 = new Paddles(shared, red, [30,-30]);
         paddle3 = new Paddles(shared, 0x0000ff, [-30,-30]);
-        paddle4 = new Paddles(shared, 0x000000, [-30, 30]);
+        paddle4 = new Paddles(shared, black, [-30, 30]);
 
         Balls.prototype.bounce = shared.util.maybe(Balls.prototype.bounce);
         ball = new Balls(shared);
@@ -251,6 +270,7 @@
     }
 
     function anim() {
+         stats.begin();
         requestAnimationFrame(anim);
 
         computePaddle(paddle, shared.pressedKeys);
@@ -270,24 +290,26 @@
             var paddleHit = ray.intersectObjects([paddle.geometry,paddle2.geometry,paddle3.geometry,paddle4.geometry]);
             if (results.length > 0 && results[0].distance < direction.length()) {
                 if(results[0].object.name == "floor"){
-                    shared.scene.remove(ball.geometry);
+                    //shared.scene.remove(ball.geometry);
+                    ball.geometry.material.wireframe = true;
+                    ball.geometry.material.color = new THREE.Color({r: 255, g: 255, b: 255});
+                    /*
                     setTimeout(function(){
                         var p = shared.parameters;
                         ball.geometry.position = new THREE.Vector3(0,0,0);
                         shared.scene.add(ball.geometry); 
                     }, 500)
+*/
                 }
                 else{
                     ball.bounce(direction.clone().normalize().multiplyScalar(0.9));
                     var hit = results[0].object.idx;
-                    var temp = shared.collidableMeshList[hit];
-                    shared.signals.blockHit.dispatch(hit, ball.geometry.material.color);
-                    delete shared.collidableMeshList[hit];
-                    setTimeout(function(){shared.collidableMeshList[hit] = temp; }, 40)
+                    shared.signals.blockHit.dispatch(hit, ball.geometry.material);
                 }
                
             }
             if (paddleHit.length > 0 && paddleHit[0].distance < direction.length()) {
+                ball.geometry.material.wireframe = false;
                 ball.geometry.material.color = paddleHit[0].object.material.color;
                 ball.bounce(direction.clone ().normalize().multiplyScalar(0.9));
             }
@@ -315,6 +337,7 @@
 
             shared.renderer.render( shared.scene, shared.camera );
         }
+         stats.end();
     }
 
     function BoundingBox(shared) {
@@ -323,24 +346,44 @@
         this.depth = shared.parameters.bounding.depth;
         var geometry = new THREE.CubeGeometry(this.width, this.height, this.depth,
             shared.parameters.bounding.sx, shared.parameters.bounding.sy, shared.parameters.bounding.sz);
-        var material = new THREE.MeshBasicMaterial({wireframe: true, opacity: 0, transparency: true});
+        var material = new THREE.MeshBasicMaterial({wireframe: true, opacity: 0, transparency: true, color: 0x777777});
         var boundingBox = new THREE.Mesh(geometry, material);
         boundingBox.position = new THREE.Vector3(shared.parameters.bounding.x, shared.parameters.bounding.y,
             shared.parameters.bounding.z);
         this.geometry = boundingBox.clone();
 
         var floorGeometry = new THREE.PlaneGeometry(shared.parameters.bounding.width, shared.parameters.bounding.height);
-
-        var floorMaterial = new THREE.MeshBasicMaterial({wireframe: true, color: 0x13bee9});
-
+        var floorMaterial = new THREE.MeshBasicMaterial({wireframe: true, color: 0x000000});
         var floorMesh = new THREE.Mesh(floorGeometry, floorMaterial);
 
         floorMesh.rotation.x = Math.PI / 2;
-        floorMesh.position.y = -22.5;
-        floorMesh.position.z = 5;
+        floorMesh.position.y = -23;
+        floorMesh.position.z = 6.5;
 
         this.floorGeometry = floorMesh.clone();
         this.floorGeometry.name = "floor";
+
+        var bottomGeometry = new THREE.PlaneGeometry(shared.parameters.bounding.width, shared.parameters.bounding.height,3,3);
+        var bottomMaterial = new THREE.MeshBasicMaterial({ wireframe: true, color: 0x777777});
+        var bottomMesh = new THREE.Mesh(bottomGeometry, bottomMaterial);
+
+        bottomMesh.rotation.x = Math.PI / 2;
+        bottomMesh.position.y = -25;
+        bottomMesh.position.z = 6.5;
+
+        this.bottomGeometry = bottomMesh.clone();
+        this.bottomGeometry.name = "bottomGeometry";
+
+        var ceilingGeometry = new THREE.PlaneGeometry(shared.parameters.bounding.width, shared.parameters.bounding.height,3,3);
+        var ceilingMaterial = new THREE.MeshBasicMaterial({ wireframe: true, color: 0x777777});
+        var ceilingMesh = new THREE.Mesh(bottomGeometry, bottomMaterial);
+
+        ceilingMesh.rotation.x = Math.PI / 2;
+        ceilingMesh.position.y = 24.6;
+        ceilingMesh.position.z = 6.5;
+
+        this.ceilingGeometry = ceilingMesh.clone();
+        this.ceilingGeometry.name = "bottomGeometry";
 
     }
 
@@ -360,7 +403,6 @@
 
     function handleKeyPresses(speed) {
         return function (event) {
-            console.log(String.fromCharCode(event.keyCode));
             var key = String.fromCharCode(event.keyCode);
             if (key == 'W') {
                 shared.pressedKeys[0] = speed;

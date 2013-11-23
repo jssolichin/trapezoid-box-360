@@ -5,11 +5,11 @@ var Balls = function (shared) {
     var p = shared.parameters;
     this.radius = p.ballsize;
     var geometry = new THREE.SphereGeometry(this.radius);
-    var material = new THREE.MeshBasicMaterial({color: 0x000000});
+    var material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xffffff});
     var mesh = new THREE.Mesh(geometry, material);
     this.geometry = mesh.clone();
 
-    var helperGeometry = new THREE.PlaneGeometry(p.bounding.width, p.bounding.depth / p.bounding.sz,
+    var helperGeometry = new THREE.PlaneGeometry(p.bounding.width/ 3, p.bounding.depth / 3,
         p.bounding.sx, p.bounding.sz);
 
     var helperMaterial = new THREE.MeshBasicMaterial({wireframe: true, color: 0x13bee9});
@@ -17,7 +17,7 @@ var Balls = function (shared) {
     var helperMesh = new THREE.Mesh(helperGeometry, helperMaterial);
 
     helperMesh.rotation.x = Math.PI / 2;
-    helperMesh.position.y = -23;
+    helperMesh.position.y = -24;
     //console.log(helperMesh);
 
     this.helperGeometry = helperMesh.clone();
@@ -38,7 +38,12 @@ Balls.prototype.update = function (bounding) {
     }
     this.geometry.position.add(this.velocity);
 
-    this.helperGeometry.position.z = this.geometry.position.z;
+        this.helperGeometry.position.z = this.geometry.position.z;
+        this.helperGeometry.position.x = this.geometry.position.x;
+        this.helperGeometry.material.opacity = THREE.Math.mapLinear(this.geometry.position.y, -25, 25, 1,0);
+        this.helperGeometry.material.transparent = true;
+
+    
 };
 
 Balls.prototype.checkBounce = function (position, boundheight, boundoffset) {
@@ -51,6 +56,7 @@ Balls.prototype.getPosition = function () {
 };
 
 Balls.prototype.bounce = function (direction) {
+    //this.geometry.position.y =0
     /*
     this.velocity[side] = this.velocity[side] * -1;
     this.geometry.position.add(this.velocity);
@@ -58,4 +64,6 @@ Balls.prototype.bounce = function (direction) {
     this.velocity.y = direction.y * -1;
     this.velocity.x = direction.x * -1;
     this.velocity.z = direction.z * -1;
+
+
 };
