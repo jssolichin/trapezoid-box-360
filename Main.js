@@ -38,14 +38,14 @@
                 sz: 1
             },
             bricksize: {
-                /*
+                
                 width: 20,
                 height: 10,
                 depth: 20
-                */
+                /*
                 width: 60,
                 height: 10,
-                depth: 60
+                depth: 60*/
             },
             brickspacing: {
                 x: 0,
@@ -53,24 +53,24 @@
                 z: 0
             },
             bricklayout: {
-                /*
+                
                 x: 3,
                 y: 1,
                 z: 3
-                */
+                /*
                  x: 1,
                 y: 1,
-                z: 1
+                z: 1*/
             },
             brickoffsets: {
-                /*
+                
                 x: 10,
                 y: 30,
                 z: -14
-                */
+                /*
                 x:30,
                 y:30,
-                z:5
+                z:5*/
             },
             paddlesize: {
                 width: 20,
