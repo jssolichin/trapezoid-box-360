@@ -86,7 +86,7 @@ Bricks.prototype.setSignal = function (signals, scene, shared) {
                 if(theColor.r >0 &&theColor.g>0 && theColor.b >0){
                     //has been hit with all 3 colors then it can no longer change
                 }
-                else if(color.getHexString() ==141414 ){
+                else if(color.getHexString() ==444444 ){
                     if(theColor.getHexString() ==000000) //if is black hit black, dont reduce anymore
                         theColor.setHex(000000)
                     else

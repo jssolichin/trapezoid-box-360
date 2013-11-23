@@ -147,7 +147,8 @@
                 height: 0.5,
                 offsetX: 0,
                 offsetY: 0,
-                background: new THREE.Color().setRGB( 0.2, 0.5, 0.7 ),
+                background: new THREE.Color().setRGB(0,0,0 ),
+                //background: new THREE.Color().setRGB( 0.2, 0.5, 0.7 ),
                 eye: [0, 5, -80 ],
                 up: [ 0, 1, 0 ],
                 fov: 60,
@@ -162,7 +163,8 @@
                 height: 0.5,
                 offsetX: 0,
                 offsetY: 0,
-                background: new THREE.Color().setRGB( 0.5, 0.5, 0.7 ),
+                background: new THREE.Color().setRGB(0,0,0 ),
+                //background: new THREE.Color().setRGB( 0.5, 0.5, 0.7 ),
                 eye: [ 85, 5, 5.7 ],
                 up: [ 0, 0, -1 ],
                 fov: 60,
@@ -178,7 +180,8 @@
                 height: 0.5,
                 offsetX: 0,
                 offsetY: 0,
-                background: new THREE.Color().setRGB( 0.7, 0.5, 0.5 ),
+                background: new THREE.Color().setRGB(0,0,0 ),
+                //background: new THREE.Color().setRGB( 0.7, 0.5, 0.5 ),
                 eye: [ 0, 5, 90 ],
                 up: [ 0, -1, 0 ],
                 fov: 60,
@@ -193,7 +196,8 @@
                 height: 0.5,
                 offsetX: 0,
                 offsetY: 0,
-                background: new THREE.Color().setRGB( 0.5, 0.7, 0.7 ),
+                background: new THREE.Color().setRGB(0,0,0 ),
+                //background: new THREE.Color().setRGB( 0.5, 0.7, 0.7 ),
                 eye: [ -85, 5.3, 6.3 ],
                 up: [ 0, 0, -1 ],
                 fov: 60,
@@ -246,7 +250,7 @@
         //console.log(bricks.brickList[3].getBounding());
         bricks.setSignal(shared.signals, shared.scene, shared);
 
-        var black = new THREE.Color("rgb(20,20,20)");
+        var black = new THREE.Color(0x444444);
         var red = new THREE.Color("rgb(255,0,0)");
         paddle = new Paddles(shared, 0x00ff00, [30,30]);
         paddle2 = new Paddles(shared, red, [30,-30]);
