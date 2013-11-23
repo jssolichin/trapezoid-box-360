@@ -73,7 +73,7 @@ Bricks.prototype.update = function(fn) {
 Bricks.prototype.setSignal = function (signals, scene, shared) {
     var self = this;
    signals.blockHit.add(function(idx, ballMaterial) {
-        if (self.brickList[idx] != undefined) {
+        if (self.brickList[idx] != undefined && shared.gameEnd != true) {
             var color = ballMaterial.color;
             var theColor = self.brickList[idx].mesh.material.emissive ? self.brickList[idx].mesh.material.emissive.clone() : null;
             var theOpacity = self.brickList[idx].mesh.material.opacity; 

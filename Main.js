@@ -9,6 +9,7 @@
 
     var container, bricks, paddle, boundingBox, ball, Signal = signals.Signal, views;
     var shared = {
+        gameEnd: false,
         score: 0,
         numOfBricksDone: 0,
         numOfBalls: 3,
@@ -86,6 +87,7 @@
             blockHit: new Signal()
         },
         killScreen: function(){
+            shared.gameEnd = true;
             console.log('killscreen', shared.score);
 
             d3.selectAll("#killScreens .eachKill")
@@ -93,12 +95,13 @@
                 .style('color', '#000')
 
             d3.selectAll("#killScreens .eachKill .textLocation")
-                .style('font-size', '3em')
-                .style('line-height', '4em')
+                .style('font-size', '5em')
+                .style('line-height', '4.5em')
                 .style('z-index', '4')
                 .style('position', 'relative')
                     
             d3.selectAll("#killScreens .eachKill .rainbow")
+                .style('-webkit-transition','all .5s ease-in-out')
                 .style('height', shared.score*100+"%")
                 .style('width', '100%')
                 .style('bottom', '0px')
@@ -323,6 +326,9 @@
                 .style("color", "#eee")
                 .style("position", "absolute")
                 
+            d3.selectAll("#killScreens .eachKill .rainbow")
+                .style('width', '100%')
+                .style('height', '0px')
 
             d3.selectAll("#screen"+(ii+1))
                 .style('top', window.innerHeight-bottom-(window.innerHeight/3+4)+"px")
@@ -376,7 +382,7 @@
                     }
                    
                 }
-                if (paddleHit.length > 0 && paddleHit[0].distance < direction.length()) {
+                if (paddleHit.length > 0 && paddleHit.length <=3 && paddleHit[0]!= null && paddleHit[0].distance < direction.length()) {
                     ball.geometry.material.wireframe = false;
                     ball.geometry.material.color = paddleHit[0].object.material.color;
                     ball.bounce(direction.clone ().normalize().multiplyScalar(0.9));
