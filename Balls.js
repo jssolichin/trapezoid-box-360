@@ -7,6 +7,8 @@ var Balls = function (shared) {
     var geometry = new THREE.SphereGeometry(this.radius);
     var material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xffffff});
     var mesh = new THREE.Mesh(geometry, material);
+    mesh.position.x = Math.random()*40-20;
+    mesh.position.z = Math.random()*40-20;
     this.geometry = mesh.clone();
 
     var helperGeometry = new THREE.PlaneGeometry(p.bounding.width/ 3, p.bounding.depth / 3,

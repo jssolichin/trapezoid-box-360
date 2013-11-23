@@ -8,6 +8,8 @@
 
     var container, bricks, paddle, boundingBox, ball, Signal = signals.Signal, views;
     var shared = {
+        numOfBalls: 3,
+        theBalls: [],
         width: window.innerHeight-5,
         height: window.innerHeight-5,
         mouseX: 0,
@@ -252,15 +254,20 @@
         paddle4 = new Paddles(shared, black, [-30, 30]);
 
         Balls.prototype.bounce = shared.util.maybe(Balls.prototype.bounce);
-        ball = new Balls(shared);
+
+        for(var i = 0; i<shared.numOfBalls; i++){
+            shared.theBalls[i] = new Balls(shared);
+
+            shared.scene.add(shared.theBalls[i].geometry);
+            shared.scene.add(shared.theBalls[i].helperGeometry);
+        }
 
         shared.scene.add(paddle.geometry);
         shared.scene.add(paddle2.geometry);
         shared.scene.add(paddle3.geometry);
         shared.scene.add(paddle4.geometry);
 
-        shared.scene.add(ball.geometry);
-        shared.scene.add(ball.helperGeometry);
+        
 
         window.addEventListener('mousemove', onMouseMove, false);
         window.addEventListener('click', onClick, false);
@@ -278,40 +285,43 @@
         computePaddle(paddle3, shared.pressedKeys3);
         computePaddle(paddle4, shared.pressedKeys4);
 
-        ball.update(shared.parameters.bounding);
-        var origin = ball.geometry.position.clone();
-        for (var vtxIdx = 0; vtxIdx < ball.geometry.geometry.vertices.length ; vtxIdx++) {
-            var lvtx = ball.geometry.geometry.vertices[vtxIdx].clone();
-            var gvtx = lvtx.applyMatrix4(ball.geometry.matrix);
-            var direction = gvtx.sub(ball.geometry.position);
+        for(var i = 0; i<shared.theBalls.length; i++){
+            var ball = shared.theBalls[i];
+            ball.update(shared.parameters.bounding);
+            var origin = ball.geometry.position.clone();
+            for (var vtxIdx = 0; vtxIdx < ball.geometry.geometry.vertices.length ; vtxIdx++) {
+                var lvtx = ball.geometry.geometry.vertices[vtxIdx].clone();
+                var gvtx = lvtx.applyMatrix4(ball.geometry.matrix);
+                var direction = gvtx.sub(ball.geometry.position);
 
-            var ray = new THREE.Raycaster(origin, direction.clone().normalize());
-            var results = ray.intersectObjects(shared.collidableMeshList);
-            var paddleHit = ray.intersectObjects([paddle.geometry,paddle2.geometry,paddle3.geometry,paddle4.geometry]);
-            if (results.length > 0 && results[0].distance < direction.length()) {
-                if(results[0].object.name == "floor"){
-                    //shared.scene.remove(ball.geometry);
-                    ball.geometry.material.wireframe = true;
-                    ball.geometry.material.color = new THREE.Color({r: 255, g: 255, b: 255});
-                    /*
-                    setTimeout(function(){
-                        var p = shared.parameters;
-                        ball.geometry.position = new THREE.Vector3(0,0,0);
-                        shared.scene.add(ball.geometry); 
-                    }, 500)
-*/
+                var ray = new THREE.Raycaster(origin, direction.clone().normalize());
+                var results = ray.intersectObjects(shared.collidableMeshList);
+                var paddleHit = ray.intersectObjects([paddle.geometry,paddle2.geometry,paddle3.geometry,paddle4.geometry]);
+                if (results.length > 0 && results[0].distance < direction.length()) {
+                    if(results[0].object.name == "floor"){
+                        //shared.scene.remove(ball.geometry);
+                        ball.geometry.material.wireframe = true;
+                        ball.geometry.material.color = new THREE.Color({r: 255, g: 255, b: 255});
+                        /*
+                        setTimeout(function(){
+                            var p = shared.parameters;
+                            ball.geometry.position = new THREE.Vector3(0,0,0);
+                            shared.scene.add(ball.geometry); 
+                        }, 500)
+    */
+                    }
+                    else{
+                        ball.bounce(direction.clone().normalize().multiplyScalar(0.9));
+                        var hit = results[0].object.idx;
+                        shared.signals.blockHit.dispatch(hit, ball.geometry.material);
+                    }
+                   
                 }
-                else{
-                    ball.bounce(direction.clone().normalize().multiplyScalar(0.9));
-                    var hit = results[0].object.idx;
-                    shared.signals.blockHit.dispatch(hit, ball.geometry.material);
+                if (paddleHit.length > 0 && paddleHit[0].distance < direction.length()) {
+                    ball.geometry.material.wireframe = false;
+                    ball.geometry.material.color = paddleHit[0].object.material.color;
+                    ball.bounce(direction.clone ().normalize().multiplyScalar(0.9));
                 }
-               
-            }
-            if (paddleHit.length > 0 && paddleHit[0].distance < direction.length()) {
-                ball.geometry.material.wireframe = false;
-                ball.geometry.material.color = paddleHit[0].object.material.color;
-                ball.bounce(direction.clone ().normalize().multiplyScalar(0.9));
             }
         }
 
