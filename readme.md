@@ -27,11 +27,11 @@ Trapezoid Box 360 is a holographic game originally designed for [UCLA Game Lab's
 * Run the file on any webserver that can serve javascript and open [index.html](index.html). TB360 uses WebGL and so you need a relatively new browser to run it. 
 * To edit keys used to move the paddles, edit the bottom of [js/main.js](js/main.js).
 
-## Credits
+## Authors
 * [Alex Lu](http://xander.lu/)
 * [Kevin Lin](http://kevinl.in)
 * [Jonathan Solichin](http://jssolichin.com)
 
-
+# Special Thanks
 * [THREE.js](https://github.com/mrdoob/three.js)
 * [UCLA Game Lab](http://games.ucla.edu/)
