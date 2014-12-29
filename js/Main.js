@@ -512,6 +512,7 @@
     function handleKeyPresses(speed) {
         return function (event) {
             var key = String.fromCharCode(event.keyCode);
+            //east player
             if (key == "H") {
                 shared.pressedKeys[0] = speed;
                 shared.pressedKeys[2] = 0;
@@ -528,7 +529,8 @@
                 shared.pressedKeys[3] = speed;
                 shared.pressedKeys[1] = 0;
             }
-//
+
+            //west player
             if (key == "A") {
                 shared.pressedKeys2[0] = speed;
                 shared.pressedKeys2[2] = 0;
@@ -546,6 +548,7 @@
                 shared.pressedKeys2[1] = 0;
             }
             
+            //south player
             if (key == "I") {
                 shared.pressedKeys3[0] = speed;
                 shared.pressedKeys3[2] = 0;
@@ -563,6 +566,7 @@
                 shared.pressedKeys3[1] = 0;
             }
 
+            //north player
             if (key == "(") {
                 shared.pressedKeys4[0] = speed;
                 shared.pressedKeys4[2] = 0;
