@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>TRAPEZOID BOX 360 {By Kevin Lin X Alex Lu X Jonathan Solichin}</title>
-    <link href='http://fonts.googleapis.com/css?family=Share+Tech+Mono' rel='stylesheet' type='text/css'>
+    <title>TRAPEZOID BOX 360 By KLin, ALu, JSolichin - 2013</title>
 
     <style>
 		body {margin: 0px; 
@@ -10,7 +9,7 @@
   			 text-align:center; background: #000;}
 
   		#killScreens{
-  			font-family: 'Share Tech Mono', sans-serif;
+  			font-family: sans-serif;
   		}
   		.rainbow {
   			background: -webkit-gradient(linear,  left top,  left bottom, 
@@ -26,13 +25,15 @@
   			background: url(logo.svg);-webkit-background-size: cover;
   			width: 10%;
   			height: 10%;
-  			position: absolute;
+  			position: fixed;
+			left: 0;
+			right: 0;
+			margin-right: auto;
+			margin-left: auto;
   			top: 0px;
-  			left:0px;
+  			/*left:0px;*/
   		}
     </style>
-
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 </head>
 <body>
 <div id="logo"></div>
@@ -64,5 +65,6 @@
 <script type="text/javascript" src="Bricks.js"></script>
 <script type="text/javascript" src="Balls.js"></script>
 <script type="text/javascript" src="Main.js"></script>
+
 
 </html>

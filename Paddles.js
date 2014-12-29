@@ -1,9 +1,3 @@
-/**
- * Created with JetBrains WebStorm.
- * User: alxlu
- * Date: 10/18/13
- * Time: 2:06 PM
- */
 var Paddles = function (shared, color, pos) {
 
     var geometry = new THREE.CubeGeometry(shared.parameters.paddlesize.width, shared.parameters.paddlesize.height,

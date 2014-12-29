@@ -1,9 +1,3 @@
-/**
- * Created with JetBrains WebStorm.
- * User: alxlu
- * Date: 10/15/13
- * Time: 11:40 PM
- */
 (function () {
 
 
@@ -88,27 +82,31 @@
         },
         killScreen: function(){
             shared.gameEnd = true;
-            console.log('killscreen', shared.score);
 
-            d3.selectAll("#killScreens .eachKill")
-                .style('background', '#ccc')
-                .style('color', '#000')
+			$eachKill = document.getElementsByClassName("eachKill");
+			
+			for(var i = 0; i < $eachKill.length; i++){
+				$currentEachKillStyle = $eachKill[i].style;
 
-            d3.selectAll("#killScreens .eachKill .textLocation")
-                .style('font-size', '5em')
-                .style('line-height', '4.5em')
-                .style('z-index', '4')
-                .style('position', 'relative')
-                    
-            d3.selectAll("#killScreens .eachKill .rainbow")
-                .style('-webkit-transition','all .5s ease-in-out')
-                .style('height', shared.score*100+"%")
-                .style('width', '100%')
-                .style('bottom', '0px')
-                .style('z-index', '2')
-                .style('position','absolute')
+				$currentEachKillStyle.background = "#ccc";
+				$currentEachKillStyle.color = "#000";
 
-            setTimeout(function(){document.location.reload(true)}, 5000)
+				$currentRainbowStyle = $eachKill[i].getElementsByClassName("rainbow")[0].style;
+				$currentRainbowStyle.width = "100%";
+				$currentRainbowStyle.height = shared.score*100+"%";
+				$currentRainbowStyle.bottom = "0px";
+				$currentRainbowStyle.position = "absolute";
+				$currentRainbowStyle["z-index"] = "2";
+				$currentRainbowStyle["-webkit-transition"] = "all .5s ease-in-out";
+
+				$currentTextLocationStyle = $eachKill[i].getElementsByClassName("textLocation")[0].style;
+				$currentTextLocationStyle.position = "relative";
+				$currentTextLocationStyle["font-size"] = "5em";
+				$currentTextLocationStyle["line-height"] = "2em";
+				$currentTextLocationStyle["z-index"] = "4";
+			}
+
+			setTimeout(function(){document.location.reload(true)}, 7000)
         },
         util: {
             combine: function (rule) {
@@ -160,7 +158,7 @@
 
     function init() {
         //create container and append to scene.
-        container = document.createElement('div');
+        container = document.createElement("div");
         container.id = "webgl";
         document.body.appendChild(container);
 
@@ -280,10 +278,10 @@
 
         var black = new THREE.Color("rgb(124,124,124)");
         var red = new THREE.Color("rgb(255,0,0)");
-        paddle = new Paddles(shared, 0x00ff00, [30,30]);
-        paddle2 = new Paddles(shared, red, [30,-30]);
-        paddle3 = new Paddles(shared, 0x0000ff, [-30,-30]);
-        paddle4 = new Paddles(shared, black, [-30, 30]);
+        paddle = new Paddles(shared, 0x00ff00, [-40,7]);
+        paddle2 = new Paddles(shared, red, [40,5]);
+        paddle3 = new Paddles(shared, 0x0000ff, [0,40]);
+        paddle4 = new Paddles(shared, black, [0, -40]);
 
         Balls.prototype.bounce = shared.util.maybe(Balls.prototype.bounce);
 
@@ -299,17 +297,12 @@
         shared.scene.add(paddle3.geometry);
         shared.scene.add(paddle4.geometry);
 
-        
-
-        window.addEventListener('mousemove', onMouseMove, false);
-        window.addEventListener('click', onClick, false);
-        window.addEventListener('keydown', handleKeyPresses(shared.parameters.paddlespeed), false);
-        window.addEventListener('keyup', handleKeyPresses(0), false);
+        window.addEventListener("mousemove", onMouseMove, false);
+        window.addEventListener("click", onClick, false);
+        window.addEventListener("keydown", handleKeyPresses(shared.parameters.paddlespeed), false);
+        window.addEventListener("keyup", handleKeyPresses(0), false);
 
         var marginFromLeftEdge = window.innerWidth/2-window.innerHeight/2;
-
-        d3.selectAll("#killScreens div")
-        //    .style('display', 'none')
 
         for ( var ii = 0; ii < views.length; ++ii ) {
 
@@ -320,29 +313,32 @@
             var width  = Math.floor( window.innerHeight / 3 );
             var height = Math.floor( window.innerHeight / 3 );
 
-            d3.selectAll("#killScreens .eachKill")
-                .style("width",width+"px")
-                .style("height", height+"px")
-                .style("color", "#eee")
-                .style("position", "absolute")
-                
-            d3.selectAll("#killScreens .eachKill .rainbow")
-                .style('width', '100%')
-                .style('height', '0px')
+   			$eachKill = document.getElementsByClassName("eachKill");
+			
+			for(var i = 0; i < $eachKill.length; i++){
+				$currentEachKillStyle = $eachKill[i].style;
 
-            d3.selectAll("#screen"+(ii+1))
-                .style('top', window.innerHeight-bottom-(window.innerHeight/3+4)+"px")
-                .style('left', marginFromLeftEdge+left+"px")
-                .style('-webkit-transform', function(){
-                    return "rotate("+(ii*-1)*90+"deg)"
-                })
+				$currentEachKillStyle.width = width+"px";
+				$currentEachKillStyle.height = height+"px";
+				$currentEachKillStyle.color = "#eee";
+				$currentEachKillStyle.position = "absolute";
+
+				$currentRainbowStyle = $eachKill[i].getElementsByClassName("rainbow")[0].style;
+				$currentRainbowStyle.width = "100%";
+				$currentRainbowStyle.height = "0px";
+			}
+
+            $currentPlayerStatsStyle = document.getElementById("screen"+(ii+1)).style;
+			$currentPlayerStatsStyle.top = window.innerHeight-bottom-(window.innerHeight/3+4)+"px";
+			$currentPlayerStatsStyle.left = marginFromLeftEdge+left+"px";
+			$currentPlayerStatsStyle["-webkit-transform"] = "rotate("+(ii*-1)*90+"deg) scaleX(-1)";
+
         }
 
-        d3.select("#logo")
-            .style('width', Math.floor( window.innerHeight  /3)+"px" )
-            .style('height', Math.floor( window.innerHeight  /3) +"px")
-            .style('top',  Math.floor( window.innerHeight  /3)*1 - (window.innerHeight/3*.03) +"px")
-            .style('left', marginFromLeftEdge+ Math.floor( window.innerHeight  /3)*1 +"px")
+        var $logoStyle = document.getElementById("logo").style;
+            $logoStyle.width =  Math.floor( window.innerHeight  /6.5) + "px" ;
+            $logoStyle.height = Math.floor( window.innerHeight  /6.5) + "px";
+            $logoStyle.top = Math.floor( window.innerHeight  /2)-((window.innerHeight  /6.5)/2) + "px";
 
     }
 
@@ -434,11 +430,15 @@
                 shared.killScreen();
             }
             else {
-                d3.selectAll('#killScreens .textLocation')
-                    .html(parseInt(shared.score*100)+"%")
+                var $textLocation = document.getElementsByClassName("textLocation");
 
-                d3.selectAll('#killScreens #screen1 .textLocation')
-                    .html((100-parseInt(shared.score*100))+"%")
+                for(var i = 0; i < $textLocation.length; i++){
+                    if(i != 0)
+                        $textLocation[i].innerHTML = "Score: " + parseInt(shared.score*100)+"%";
+                    else
+                        $textLocation[i].innerHTML = "Score: " + (100-parseInt(shared.score*100))+"%";
+                }
+
             }
             
         }
@@ -512,75 +512,75 @@
     function handleKeyPresses(speed) {
         return function (event) {
             var key = String.fromCharCode(event.keyCode);
-            if (key == 'W') {
+            if (key == "H") {
                 shared.pressedKeys[0] = speed;
                 shared.pressedKeys[2] = 0;
             }
-            if (key == 'A') {
+            if (key == "G") {
                 shared.pressedKeys[1] = speed;
                 shared.pressedKeys[3] = 0;
             }
-            if (key == 'S') {
+            if (key == "F") {
                 shared.pressedKeys[2] = speed;
                 shared.pressedKeys[0] = 0;
             }
-            if (key == 'D') {
+            if (key == "T") {
                 shared.pressedKeys[3] = speed;
                 shared.pressedKeys[1] = 0;
             }
 //
-            if (key == '&') {
+            if (key == "A") {
                 shared.pressedKeys2[0] = speed;
                 shared.pressedKeys2[2] = 0;
             }
-            if (key == '%') {
+            if (key == "W") {
                 shared.pressedKeys2[1] = speed;
                 shared.pressedKeys2[3] = 0;
             }
-            if (key == '(') {
+            if (key == "D") {
                 shared.pressedKeys2[2] = speed;
                 shared.pressedKeys2[0] = 0;
             }
-            if (key == '\'') {
+            if (key == "S") {
                 shared.pressedKeys2[3] = speed;
                 shared.pressedKeys2[1] = 0;
             }
             
-            if (key == 'T') {
+            if (key == "I") {
                 shared.pressedKeys3[0] = speed;
                 shared.pressedKeys3[2] = 0;
             }
-            if (key == 'F') {
+            if (key == "L") {
                 shared.pressedKeys3[1] = speed;
                 shared.pressedKeys3[3] = 0;
             }
-            if (key == 'G') {
+            if (key == "K") {
                 shared.pressedKeys3[2] = speed;
                 shared.pressedKeys3[0] = 0;
             }
-            if (key == 'H') {
+            if (key == "J") {
                 shared.pressedKeys3[3] = speed;
                 shared.pressedKeys3[1] = 0;
             }
 
-            if (key == 'I') {
+            if (key == "(") {
                 shared.pressedKeys4[0] = speed;
                 shared.pressedKeys4[2] = 0;
             }
-            if (key == 'J') {
+            if (key == "%") {
                 shared.pressedKeys4[1] = speed;
                 shared.pressedKeys4[3] = 0;
             }
-            if (key == 'K') {
+            if (key == "&") {
                 shared.pressedKeys4[2] = speed;
                 shared.pressedKeys4[0] = 0;
             }
-            if (key == 'L') {
+            if (key == "\"") {
                 shared.pressedKeys4[3] = speed;
                 shared.pressedKeys4[1] = 0;
             }
 
-            /*if (key == 'T') {
+            /*if (key == "T") {
                 shared.signals.blockHit.dispatch(2);
             }*/
         };
