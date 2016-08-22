@@ -3,11 +3,11 @@
 
 Trapezoid Box 360 is a holographic game originally designed for [UCLA Game Lab's Cocktail Cabinet](http://games.ucla.edu/game/ucla-game-lab-cocktail-cabinets/). It is an asymmetric multiplayer tribute to the classic breakout with a hint of color theory. Three player (red, green, and blue) works together to fill the world with all colors (through additive color combinations / white), against one player (opacity / grey), whose goal is to make everything disappear. 
 
-![hero](http://jssolichin.com/wp-content/uploads/2013/11/1477577_10152069193140309_1228087979_n.jpg)
-![set up](http://jssolichin.com/wp-content/uploads/2014/02/IMG_1158-1024x704.jpg)
-![happy](http://jssolichin.com/wp-content/uploads/2014/01/DSC_3096.jpg)
-![group](http://jssolichin.com/wp-content/uploads/2014/01/DSC_3163.jpg)
-![intense](http://jssolichin.com/wp-content/uploads/2014/01/DSC_3334.jpg)
+![hero](http://jssolichin.com/blog/wp-content/uploads/2013/11/1477577_10152069193140309_1228087979_n.jpg)
+![set up](http://jssolichin.com/blog/wp-content/uploads/2014/02/IMG_1158-1024x704.jpg)
+![happy](http://jssolichin.com/blog/wp-content/uploads/2014/01/DSC_3096.jpg)
+![group](http://jssolichin.com/blog/wp-content/uploads/2014/01/DSC_3163.jpg)
+![intense](http://jssolichin.com/blog/wp-content/uploads/2014/01/DSC_3334.jpg)
 
 ## Rules
 
